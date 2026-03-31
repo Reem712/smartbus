@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" id="html-tag" class="dark">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartBus - Settings</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0d0f11',
+                        sidebarBg: '#0e1114',
+                        accent: '#f9b233',
+                        cardBg: '#161a1f',
+                        textGray: '#8a8d91',
+                        success: '#3ddc97'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        body { transition: background-color 0.3s ease, color 0.3s ease; }
+    </style>
+</head>
+
+<body class="bg-[#f3f4f6] dark:bg-darkBg text-gray-900 dark:text-white font-inter overflow-x-hidden transition-colors duration-300">
+
+    <div id="overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[45] hidden transition-opacity"></div>
+
+    <div class="flex h-screen overflow-hidden">
+
+        <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-sidebarBg flex flex-col border-r border-gray-200 dark:border-white/5 transform -translate-x-full lg:translate-x-0 lg:relative transition-transform duration-300 ease-in-out flex-shrink-0">
+            
+            <button onclick="toggleSidebar()" class="lg:hidden absolute top-4 right-4 text-gray-500 dark:text-textGray hover:text-accent p-2">
+                <i class="fa-solid fa-xmark text-2xl"></i>
+            </button>
+
+            <div class="p-6 flex items-center gap-3">
+                <div class="bg-accent p-2 rounded-lg text-black shadow-[0_0_15px_rgba(249,178,51,0.3)]">
+                    <i class="fas fa-bus text-lg"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-sm tracking-wide dark:text-white">SmartBus</h3>
+                    <p class="text-[10px] text-textGray uppercase font-medium">Student Portal</p>
+                </div>
+            </div>
+
+            <div class="px-4 py-2 text-[10px] text-textGray font-bold uppercase tracking-widest mt-4">Main</div>
+
+            <nav class="flex-1 px-3 space-y-1 mt-2 text-sm overflow-y-auto no-scrollbar">
+                <a href="userdashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-textGray hover:bg-gray-100 dark:hover:bg-white/5 transition">
+                    <i class="fa-solid fa-table-columns w-5 text-center"></i> Dashboard
+                </a>
+                <a href="BookTrips.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-textGray hover:bg-gray-100 dark:hover:bg-white/5 transition">
+                    <i class="fa-regular fa-calendar-check w-5 text-center"></i> Book Trip
+                </a>
+                <a href="MyTrips.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-textGray hover:bg-gray-100 dark:hover:bg-white/5 transition">
+                    <i class="fa-solid fa-route w-5 text-center"></i> My Trips
+                </a>
+                <a href="Route_Details.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-textGray hover:bg-gray-100 dark:hover:bg-white/5 transition">
+                    <i class="fa-solid fa-map-location-dot w-5 text-center"></i> Route Details
+                </a>
+                <a href="TrackBus.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-textGray hover:bg-gray-100 dark:hover:bg-white/5 transition">
+                    <i class="fa-solid fa-location-crosshairs w-5 text-center"></i> Track Bus
+                </a>
+                <a href="Attendance.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-textGray hover:bg-gray-100 dark:hover:bg-white/5 transition">
+                    <i class="fa-solid fa-chart-simple w-5 text-center"></i> Attendance
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-textGray hover:bg-gray-100 dark:hover:bg-white/5 transition">
+                    <i class="fa-regular fa-bell w-5 text-center"></i> Notifications
+                </a>
+                <a href="Chat.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-textGray hover:bg-gray-100 dark:hover:bg-white/5 transition">
+                    <i class="fa-regular fa-comments w-5 text-center"></i> Route Chat
+                </a>
+            </nav>
+
+            <div class="p-4 border-t border-gray-200 dark:border-white/5 space-y-1">
+                <a href="Support.html" class="flex items-center gap-3 px-4 py-2 text-sm text-textGray hover:text-gray-900 dark:hover:text-white transition">
+                    <i class="fa-regular fa-circle-question w-5 text-center"></i> Support
+                </a>
+                <a href="settings.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-accent/10 border border-accent text-accent font-medium shadow-sm">
+                    <i class="fa-solid fa-gear w-5 text-center"></i> Settings
+                </a>
+                <a href="sign-in.html" class="flex items-center gap-3 px-4 py-2 text-sm text-red-500 hover:text-red-400 transition">
+                    <i class="fa-solid fa-arrow-right-from-bracket w-5 text-center"></i> Logout
+                </a>
+            </div>
+        </aside>
+
+        <main class="flex-1 relative overflow-y-auto no-scrollbar flex flex-col">
+
+            <header class="sticky top-0 bg-white/80 dark:bg-darkBg/80 backdrop-blur-md z-40 border-b border-gray-200 dark:border-white/5 px-4 lg:px-8 py-4 lg:py-6 transition-colors duration-300">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                        <button onclick="toggleSidebar()" class="lg:hidden text-textGray hover:text-accent p-1">
+                            <i class="fa-solid fa-bars-staggered text-xl"></i>
+                        </button>
+                        <div>
+                            <h1 class="text-lg lg:text-xl font-bold tracking-tight dark:text-white">Settings</h1>
+                            <p class="text-[10px] lg:text-[11px] text-textGray">Manage your account</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3 lg:gap-4">
+                        <button class="relative w-10 h-10 flex items-center justify-center rounded-full bg-gray-50 dark:bg-cardBg text-textGray border border-gray-200 dark:border-white/10 hover:text-accent transition shadow-inner">
+                            <i class="fa-regular fa-bell text-lg"></i>
+                            <span class="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 border-2 border-white dark:border-cardBg rounded-full"></span>
+                        </button>
+
+                        <button onclick="toggleTheme()" class="w-10 h-10 rounded-full border border-gray-200 dark:border-white/10 flex items-center justify-center text-textGray hover:text-accent transition-all bg-gray-50 dark:bg-cardBg">
+                            <i id="theme-icon" class="fa-solid fa-moon"></i>
+                        </button>
+
+                        <div class="flex items-center gap-2 lg:gap-3 bg-gray-100 dark:bg-cardBg p-1 lg:pr-4 rounded-full border border-gray-200 dark:border-white/5">
+                            <div class="w-8 h-8 lg:w-9 lg:h-9 bg-accent/20 rounded-full flex items-center justify-center text-accent font-bold text-xs lg:text-sm">S</div>
+                            <div class="hidden sm:block text-[10px] lg:text-[11px] leading-tight text-left">
+                                <p class="font-bold text-gray-900 dark:text-white">Sara Ahmed</p>
+                                <p class="text-textGray mt-0.5">STU-981</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="p-4 lg:p-8 pb-12 transition-all duration-300">
+                <div class="w-full max-w-2xl mx-auto lg:mx-0 space-y-4 lg:space-y-5"> 
+
+                    <div class="bg-white dark:bg-cardBg border border-gray-200 dark:border-white/5 rounded-[20px] lg:rounded-[24px] p-5 lg:p-6 shadow-sm">
+                        <h4 class="font-bold text-sm mb-5 flex items-center gap-3 dark:text-white">
+                            <i class="fa-solid fa-lock text-accent"></i> Change Password
+                        </h4>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="text-[10px] text-textGray uppercase font-bold tracking-wider mb-2 block ml-1">Current Password</label>
+                                <input type="password" placeholder="••••••••" 
+                                    class="w-full bg-gray-50 dark:bg-darkBg border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-accent/40 focus:ring-1 focus:ring-accent/20 transition-all dark:text-white">
+                            </div>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="text-[10px] text-textGray uppercase font-bold tracking-wider mb-2 block ml-1">New Password</label>
+                                    <input type="password" placeholder="••••••••" 
+                                        class="w-full bg-gray-50 dark:bg-darkBg border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-accent/40 focus:ring-1 focus:ring-accent/20 transition-all dark:text-white">
+                                </div>
+                                <div>
+                                    <label class="text-[10px] text-textGray uppercase font-bold tracking-wider mb-2 block ml-1">Confirm Password</label>
+                                    <input type="password" placeholder="••••••••" 
+                                        class="w-full bg-gray-50 dark:bg-darkBg border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-accent/40 focus:ring-1 focus:ring-accent/20 transition-all dark:text-white">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white dark:bg-cardBg border border-gray-200 dark:border-white/5 rounded-[20px] lg:rounded-[24px] p-5 lg:p-6 shadow-sm">
+                        <h4 class="font-bold text-sm mb-4 flex items-center gap-3 text-success">
+                            <i class="fa-solid fa-phone"></i> Phone Number
+                        </h4>
+                        <input type="text" value="+962 79 123 4567" 
+                            class="w-full bg-gray-50 dark:bg-darkBg border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-accent/40 focus:ring-1 focus:ring-accent/20 transition-all dark:text-white">
+                    </div>
+
+                    <div class="bg-white dark:bg-cardBg border border-gray-200 dark:border-white/5 rounded-[20px] lg:rounded-[24px] p-5 lg:p-6 shadow-sm">
+                        <h4 class="font-bold text-sm mb-6 flex items-center gap-3 text-red-400">
+                            <i class="fa-solid fa-bell"></i> Notification Preferences
+                        </h4>
+                        <div class="space-y-6">
+                            <div class="flex justify-between items-center gap-4">
+                                <div>
+                                    <p class="text-sm font-bold dark:text-white text-gray-900">Booking window alerts</p>
+                                    <p class="text-[10px] text-textGray mt-0.5 leading-relaxed">Get notified when registration opens/closes</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer flex-shrink-0">
+                                    <input type="checkbox" checked class="sr-only peer">
+                                    <div class="w-10 h-5 bg-gray-300 dark:bg-gray-700 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-white after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-accent"></div>
+                                </label>
+                            </div>
+                            <div class="flex justify-between items-center gap-4">
+                                <div>
+                                    <p class="text-sm font-bold dark:text-white text-gray-900">Bus arrival updates</p>
+                                    <p class="text-[10px] text-textGray mt-0.5 leading-relaxed">Know when your bus is approaching</p>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer flex-shrink-0">
+                                    <input type="checkbox" checked class="sr-only peer">
+                                    <div class="w-10 h-5 bg-gray-300 dark:bg-gray-700 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-white after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-accent"></div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white dark:bg-cardBg border border-gray-200 dark:border-white/5 rounded-[20px] lg:rounded-[24px] p-5 lg:p-6 shadow-sm">
+                        <h4 class="font-bold text-sm mb-2 flex items-center gap-3 dark:text-white">
+                            <i class="fa-solid fa-location-dot text-accent"></i> Route Change Request
+                        </h4>
+                        <p class="text-[10px] text-textGray mb-5">Request to change your assigned route. Review required by admin.</p>
+                        <button class="w-full bg-gray-50 dark:bg-darkBg border border-gray-200 dark:border-white/10 rounded-xl py-3 text-[11px] font-bold transition-all flex items-center justify-center gap-2 hover:bg-gray-100 dark:hover:bg-white/5 dark:text-white">
+                            <i class="fa-solid fa-route text-accent"></i> Request Route Change
+                        </button>
+                    </div>
+
+                    <button class="w-full bg-accent text-black py-4 rounded-xl font-black text-xs uppercase tracking-[0.15em] shadow-[0_8px_20px_rgba(249,178,51,0.2)] hover:scale-[1.01] active:scale-95 transition-all">
+                        <i class="fa-solid fa-floppy-disk mr-2"></i> Save Changes
+                    </button>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const isOpen = sidebar.classList.contains('translate-x-0');
+            
+            if (isOpen) {
+                sidebar.classList.replace('translate-x-0', '-translate-x-full');
+                overlay.classList.add('hidden');
+            } else {
+                sidebar.classList.replace('-translate-x-full', 'translate-x-0');
+                overlay.classList.remove('hidden');
+            }
+        }
+
+        function toggleTheme() {
+            const html = document.getElementById('html-tag');
+            const icon = document.getElementById('theme-icon');
+            
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                icon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                icon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Initialize Theme from LocalStorage
+        if (localStorage.getItem('theme') === 'light') {
+            document.getElementById('html-tag').classList.remove('dark');
+            document.getElementById('theme-icon')?.classList.replace('fa-moon', 'fa-sun');
+        }
+    </script>
+</body>
+</html>

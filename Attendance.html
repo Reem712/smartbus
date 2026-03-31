@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" class="dark" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartBus | Attendance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; transition: background-color 0.3s; }
+        html[lang="ar"] body { font-family: 'Cairo', sans-serif; }
+        .circular-progress {
+            background: radial-gradient(closest-side, white 84%, transparent 85% 100%),
+                        conic-gradient(#f7a01b 82%, #e5e7eb 0);
+        }
+        .dark .circular-progress {
+            background: radial-gradient(closest-side, #1c1e26 84%, transparent 85% 100%),
+                        conic-gradient(#f7a01b 82%, #2d3036 0);
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+        
+        function toggleMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+
+        function toggleLangDropdown() {
+            document.getElementById('lang-dropdown').classList.toggle('hidden');
+        }
+
+        function setLanguage(lang) {
+            const html = document.documentElement;
+            html.setAttribute('lang', lang);
+            html.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+            
+            // تحديث نص الزر للاختصار المختار
+            document.getElementById('current-lang-text').innerText = lang.toUpperCase();
+            
+            translatePage(lang);
+            document.getElementById('lang-dropdown').classList.add('hidden');
+        }
+
+        const translations = {
+            en: {
+                title: "Attendance", subtitle: "Your trip attendance history",
+                dash: "Dashboard", book: "Book Trips", trips: "My Trips",
+                route: "Route Details", track: "Track Bus", attend_nav: "Attendance",
+                notif: "Notification", chat: "Route Chat", settings: "Settings", logout: "Logout",
+                overall: "Overall Attendance", attended: "Trips Attended", missed: "Trips Missed",
+                trend: "Monthly Trend", recent: "Recent Trips", status_a: "ATTENDED", status_m: "MISSED"
+            },
+            ar: {
+                title: "الحضور والغياب", subtitle: "سجل حضور الرحلات الخاص بك",
+                dash: "لوحة التحكم", book: "حجز الرحلات", trips: "رحلاتي",
+                route: "تفاصيل المسار", track: "تتبع الحافلة", attend_nav: "الحضور",
+                notif: "التنبيهات", chat: "دردشة المسار", settings: "الإعدادات", logout: "تسجيل الخروج",
+                overall: "نسبة الحضور العامة", attended: "رحلات تم حضورها", missed: "رحلات فائتة",
+                trend: "معدل الحضور الشهري", recent: "الرحلات الأخيرة", status_a: "تم الحضور", status_m: "لم يحضر"
+            }
+        };
+
+        function translatePage(lang) {
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                el.innerText = translations[lang][key];
+            });
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.closest('#lang-btn')) {
+                const dropdown = document.getElementById('lang-dropdown');
+                if (dropdown) dropdown.classList.add('hidden');
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#f3f4f6] text-slate-900 dark:bg-[#0f1115] dark:text-white h-screen overflow-hidden text-[13px]"> 
+    <div class="flex h-full w-full">
+        <aside class="w-[230px] min-w-[230px] bg-white dark:bg-[#0f1115] border-r dark:border-l border-gray-200 dark:border-[#1c1e26] flex flex-col p-5 transition-colors shadow-sm dark:shadow-none">
+            <div class="flex items-center gap-2.5 mb-8 pl-2">
+                <div class="w-8 h-8 bg-[#f7a01b] rounded-lg flex items-center justify-center text-black shadow-md">
+                    <i class="fas fa-bus text-sm"></i>
+                </div>
+                <div>
+                    <h2 class="font-bold text-base leading-none dark:text-white text-slate-900">SmartBus</h2>
+                    <span class="text-[9px] text-[#8a8d91] uppercase tracking-tighter">Student Portal</span>
+                </div>
+            </div>
+            
+            <nav class="flex-1 space-y-4">
+                <ul class="space-y-0.5">
+                    <li><a href="userdashboard.html" class="flex items-center gap-4 p-3 rounded-xl text-gray-500 hover:bg-gray-100 dark:hover:bg-white/5 transition text-sm"><i class="fas fa-th-large w-5"></i> <span data-key="dash">Dashboard</span></a></li>
+                    <li><a href="BookTrips.html" class="flex items-center gap-4 p-3 rounded-xl text-gray-500 hover:bg-gray-100 dark:hover:bg-white/5 transition text-sm"><i class="fas fa-user-check w-5"></i> <span data-key="book">Book Trips</span></a></li>
+                    <li><a href="myTrips.html" class="flex items-center gap-4 p-3 rounded-xl text-gray-500 hover:bg-gray-100 dark:hover:bg-white/5 transition text-sm"><i class="fas fa-history w-5"></i> <span data-key="trips">My Trips</span></a></li>
+                    <li><a href="Route_Details.html" class="flex items-center gap-4 p-3 rounded-xl text-gray-500 hover:bg-gray-100 dark:hover:bg-white/5 transition text-sm"><i class="fas fa-info-circle w-5"></i> <span data-key="route">Route Details</span></a></li>
+                    <li><a href="trackbus.html" class="flex items-center gap-4 p-3 rounded-xl text-gray-500 hover:bg-gray-100 dark:hover:bg-white/5 transition text-sm"><i class="fas fa-map-marked-alt w-5"></i> <span data-key="track">Track Bus</span></a></li>
+                    <li><a href="Attendance.html" class="flex items-center gap-4 p-3 rounded-xl bg-[#f7a01b]/10 text-[#f7a01b] text-sm font-bold"><i class="far fa-calendar-plus w-5"></i> <span data-key="attend_nav">Attendance</span></a></li>
+                    <li><a href="#" class="flex items-center gap-4 p-3 rounded-xl text-gray-500 hover:bg-gray-100 dark:hover:bg-white/5 transition text-sm justify-between"><span class="flex items-center gap-4"><i class="far fa-bell w-5"></i> <span data-key="notif">Notification</span></span></a></li>
+                    <li><a href="chat.html" class="flex items-center gap-4 p-3 rounded-xl text-gray-500 hover:bg-gray-100 dark:hover:bg-white/5 transition text-sm"><i class="far fa-comments w-5"></i> <span data-key="chat">Route Chat</span></a></li>
+                </ul>
+            </nav>
+
+            <div class="border-t border-gray-100 dark:border-white/5 pt-6 space-y-1">
+                <a href="settings.html" class="flex items-center gap-3 p-3 text-gray-500 text-sm hover:text-gray-900 dark:hover:text-white transition"><i class="fas fa-cog w-5"></i> <span data-key="settings">Settings</span></a>
+                <a href="sign-in.html" class="flex items-center gap-3 p-3 text-red-500/80 text-sm hover:text-red-500 transition"><i class="fas fa-sign-out-alt w-5"></i> <span data-key="logout">Logout</span></a>
+            </div>
+        </aside>
+
+        <main class="flex-1 flex flex-col overflow-hidden">
+            <header class="flex justify-between items-center px-8 min-h-[70px] w-full border-b border-gray-200 dark:border-[#1c1e26]/50 bg-white dark:bg-[#0f1115]">
+                <div>
+                    <h1 class="text-xl font-bold dark:text-white text-slate-900" data-key="title">Attendance</h1>
+                    <p class="text-[#8a8d91] text-[11px]" data-key="subtitle">Your trip attendance history</p>
+                </div>
+               <div class="flex items-center gap-4">
+    
+    <div class="relative text-gray-400 text-lg cursor-pointer hover:text-[#f7a01b] transition px-2">
+        <i class="far fa-bell"></i>
+        <span class="absolute top-0 right-1 bg-[#f7a01b] text-black text-[9px] w-3.5 h-3.5 rounded-full flex items-center justify-center font-bold border border-white dark:border-[#0f1115]">2</span>
+    </div>
+
+    <div class="relative">
+        <button id="lang-btn" onclick="toggleLangDropdown()" class="w-9 h-9 rounded-full bg-gray-50 dark:bg-[#1c1e26] border border-gray-200 dark:border-[#2d3036] text-[#f7a01b] hover:bg-[#f7a01b]/10 transition-all flex items-center justify-center font-bold text-[10px]">
+            <span id="current-lang-text">EN</span>
+        </button>
+        <div id="lang-dropdown" class="hidden absolute top-full mt-2 right-0 w-24 bg-white dark:bg-[#1c1e26] border border-gray-200 dark:border-[#2d3036] rounded-xl shadow-xl z-50 overflow-hidden">
+            <button onclick="setLanguage('en')" class="w-full text-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/5 text-[11px] font-bold dark:text-white transition-colors">EN</button>
+            <button onclick="setLanguage('ar')" class="w-full text-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-white/5 text-[11px] font-bold dark:text-white transition-colors border-t border-gray-100 dark:border-white/5">AR</button>
+        </div>
+    </div>
+
+    <div class="bg-gray-50 dark:bg-[#1c1e26] p-1 pr-4 pl-1 rounded-full flex items-center gap-2.5 border border-gray-200 dark:border-[#2d3036] shadow-sm">
+        <div class="w-8 h-8 rounded-full bg-[#f7a01b] flex items-center justify-center text-black font-bold text-xs">R</div>
+        <div class="text-left rtl:text-right hidden sm:block">
+            <div class="text-[11px] font-bold leading-none dark:text-white text-slate-900">Retaj Yasser</div>
+            <div class="text-[9px] text-[#8a8d91] mt-0.5">STU-001</div>
+        </div>
+    </div>
+
+    <button onclick="toggleMode()" class="w-9 h-9 rounded-full bg-gray-50 dark:bg-[#1c1e26] border border-gray-200 dark:border-[#2d3036] text-[#f7a01b] hover:bg-[#f7a01b]/10 transition-all flex items-center justify-center">
+        <i class="fas fa-sun hidden dark:block"></i>
+        <i class="fas fa-moon dark:hidden"></i>
+    </button>
+
+</div>
+            </header>
+
+            <div class="flex-1 overflow-y-auto no-scrollbar">
+                <section class="max-w-[1000px] px-8 py-8 space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div class="bg-white dark:bg-[#1c1e26] border border-gray-200 dark:border-[#2d3036] rounded-2xl p-6 flex flex-col items-center shadow-sm">
+                            <div class="circular-progress w-24 h-24 rounded-full flex items-center justify-center mb-3">
+                                <span class="text-xl font-black dark:text-white text-slate-900">82%</span>
+                            </div>
+                            <p class="text-[#8a8d91] text-xs font-medium uppercase" data-key="overall">Overall Attendance</p>
+                        </div>
+                        <div class="bg-white dark:bg-[#1c1e26] border border-gray-200 dark:border-[#2d3036] rounded-2xl p-6 shadow-sm">
+                            <div class="w-8 h-8 bg-[#00ff88]/10 text-[#00ff88] rounded-lg flex items-center justify-center mb-4 text-sm"><i class="fas fa-check-circle"></i></div>
+                            <h3 class="text-3xl font-black mb-1 dark:text-white text-slate-900">6</h3>
+                            <p class="text-[#8a8d91] text-xs" data-key="attended">Trips Attended</p>
+                        </div>
+                        <div class="bg-white dark:bg-[#1c1e26] border border-gray-200 dark:border-[#2d3036] rounded-2xl p-6 shadow-sm">
+                            <div class="w-8 h-8 bg-red-500/10 text-red-500 rounded-lg flex items-center justify-center mb-4 text-sm"><i class="fas fa-times-circle"></i></div>
+                            <h3 class="text-3xl font-black mb-1 dark:text-white text-slate-900">2</h3>
+                            <p class="text-[#8a8d91] text-xs" data-key="missed">Trips Missed</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-5 gap-5 items-start">
+                        <div class="lg:col-span-2 bg-white dark:bg-[#1c1e26] border border-gray-200 dark:border-[#2d3036] rounded-2xl p-6 h-[280px] flex flex-col shadow-sm">
+                            <h3 class="font-bold mb-6 text-[#8a8d91] uppercase text-[10px] tracking-[0.2em]" data-key="trend">Monthly Trend</h3>
+                            <div class="flex-1 relative flex items-center">
+                                <svg class="w-full h-[100px] overflow-visible" viewBox="0 0 100 40" preserveAspectRatio="none">
+                                    <path d="M0 35 C 15 35, 25 15, 45 22 S 75 5, 100 15" fill="none" stroke="#f7a01b" stroke-width="1.5" stroke-linecap="round" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-3 bg-white dark:bg-[#16181d] border border-gray-200 dark:border-[#2d3036] rounded-2xl p-6 h-[280px] flex flex-col overflow-hidden shadow-sm">
+                            <h3 class="font-bold mb-4 text-[#8a8d91] uppercase text-[10px] tracking-widest" data-key="recent">Recent Trips</h3>
+                            <div class="flex-1 overflow-y-auto space-y-2.5 no-scrollbar">
+                                <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-[#1c1e26] rounded-xl border border-gray-100 dark:border-white/[0.02]">
+                                    <span class="text-xs font-bold dark:text-white text-slate-900">Aqaleem → Stadium</span>
+                                    <span class="text-[9px] font-bold text-[#00ff88] bg-[#00ff88]/10 px-2.5 py-1 rounded-md uppercase" data-key="status_a">Attended</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-[#1c1e26] rounded-xl border border-gray-100 dark:border-white/[0.02]">
+                                    <span class="text-xs font-bold dark:text-white text-slate-900">Aqaleem → Stadium</span>
+                                    <span class="text-[9px] font-bold text-red-500 bg-red-500/10 px-2.5 py-1 rounded-md uppercase" data-key="status_m">Missed</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

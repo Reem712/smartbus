@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartBus | Trips</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-track { background: #0f1115; }
+        ::-webkit-scrollbar-thumb { background: #2d3036; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-[#0f1115] text-white h-screen overflow-hidden">
+
+    <div class="flex h-full w-full">
+        <aside class="w-[260px] min-w-[260px] bg-[#16181d] border-r border-[#2d3036] flex flex-col p-[25px]">
+            <div class="text-[#f7a01b] text-[1.5rem] font-bold mb-[40px] flex items-center gap-3">
+                <i class="fas fa-bus"></i>
+                <span>SmartBus</span>
+            </div>
+            
+            <nav class="flex-1">
+                <small class="text-[#8a8d91] text-[0.7rem] tracking-[1px] mb-[15px] block font-bold uppercase">Main</small>
+                <ul class="space-y-1">
+                    <li><a href="Dashboard.html" class="flex items-center gap-3 p-3 text-[#8a8d91] hover:bg-[#f7a01b]/10 hover:text-[#f7a01b] rounded-lg transition-all duration-300"><i class="fas fa-th-large w-5"></i> Dashboard</a></li>
+                    <li><a href="users.html" class="flex items-center gap-3 p-3 text-[#8a8d91] hover:bg-[#f7a01b]/10 hover:text-[#f7a01b] rounded-lg transition-all duration-300"><i class="fas fa-users w-5"></i> Users</a></li>
+                    <li><a href="ManageRoutes.html" class="flex items-center gap-3 p-3 text-[#8a8d91] hover:bg-[#f7a01b]/10 hover:text-[#f7a01b] rounded-lg transition-all duration-300"><i class="fas fa-route w-5"></i> Routes</a></li>
+                    <li class="bg-[#f7a01b]/10 rounded-lg"><a href="trips.html" class="flex items-center gap-3 p-3 text-[#f7a01b] font-semibold"><i class="fas fa-bus-alt w-5"></i> Trips</a></li>
+                    <li><a href="notification.html" class="flex items-center gap-3 p-3 text-[#8a8d91] hover:bg-[#f7a01b]/10 hover:text-[#f7a01b] rounded-lg transition-all duration-300"><i class="fas fa-bell w-5"></i> Notifications</a></li>
+                    <li><a href="report.html" class="flex items-center gap-3 p-3 text-[#8a8d91] hover:bg-[#f7a01b]/10 hover:text-[#f7a01b] rounded-lg transition-all duration-300"><i class="fas fa-chart-bar w-5"></i> Reports</a></li>
+                </ul>
+            </nav>
+
+            <div class="mt-20 pt-5 border-t border-[#2d3036] space-y-1">
+                <div class="flex items-center gap-3 p-2 text-[#8a8d91] cursor-pointer hover:text-white transition-colors text-sm"><i class="fas fa-cog w-5"></i> <a href="settings.html">Settings</a></div>
+                <div class="flex items-center gap-3 p-2 text-[#ff4d4d] cursor-pointer hover:opacity-80 transition-opacity text-sm font-semibold"><i class="fas fa-sign-out-alt w-5"></i> <a href="sign-in.html">Logout</a></div>
+            </div>
+        </aside>
+
+        <main class="flex-1 flex flex-col overflow-hidden">
+            <header class="flex justify-between items-center px-10 min-h-[100px] flex-shrink-0 border-b border-[#2d3036]/30">
+                <div>
+                    <h1 class="text-[1.8rem] font-bold text-white">Trips</h1>
+                    <p class="text-[#8a8d91] text-[0.9rem]">Manage daily schedules and return times</p>
+                </div>
+                
+                <div class="flex items-center gap-8">
+                    <div class="bg-[#1c1e26] border border-[#2d3036] px-4 py-2.5 rounded-xl flex items-center gap-3 w-[250px]">
+                        <i class="fas fa-search text-[#8a8d91]"></i>
+                        <input type="text" placeholder="Search..." class="bg-transparent border-none outline-none text-white w-full text-sm">
+                    </div>
+                    
+                    <div class="relative cursor-pointer text-[#8a8d91] hover:text-[#f7a01b] transition-colors">
+                        <i class="far fa-bell text-xl"></i>
+                        <span class="absolute -top-1 -right-1 bg-[#f7a01b] text-black text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">3</span>
+                    </div>
+
+                    <div class="flex items-center gap-3 pl-6 border-l border-[#2d3036]">
+                        <div class="w-10 h-10 rounded-full bg-[#f7a01b] flex items-center justify-center text-black font-bold">A</div>
+                        <div class="hidden lg:block text-left">
+                            <div class="text-sm font-bold text-white leading-none">Admin</div>
+                            <div class="text-[11px] text-[#8a8d91] mt-1 leading-none">admin@smartbus.com</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="flex-1 overflow-y-auto px-10 py-8 space-y-10">
+                
+                <div>
+                    <h2 class="text-[#8a8d91] text-xs font-bold uppercase tracking-widest mb-5 flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-[#f7a01b] rounded-full"></span> Return Trip Windows
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-[#1c1e26] border border-[#2d3036] p-6 rounded-2xl">
+                            <div class="flex justify-between items-start mb-6">
+                                <span class="bg-[#f7a01b]/10 text-[#f7a01b] px-3 py-1 rounded-lg text-sm font-bold flex items-center gap-2">
+                                    <i class="far fa-clock"></i> 3:30 PM
+                                </span>
+                                <span class="text-[#8a8d91] text-xs font-medium italic">Afternoon Return</span>
+                            </div>
+                            <div class="flex justify-between items-end mb-2">
+                                <span class="text-sm"><strong>57</strong> <span class="text-[#8a8d91]">/ 80 seats</span></span>
+                                <span class="text-[#f7a01b] font-bold">71%</span>
+                            </div>
+                            <div class="w-full bg-[#0f1115] h-2 rounded-full overflow-hidden">
+                                <div class="bg-[#f7a01b] h-full rounded-full shadow-[0_0_10px_rgba(247,160,27,0.3)] transition-all duration-1000" style="width: 71%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="bg-[#1c1e26] border border-[#2d3036] p-6 rounded-2xl">
+                            <div class="flex justify-between items-start mb-6">
+                                <span class="bg-[#f7a01b]/10 text-[#f7a01b] px-3 py-1 rounded-lg text-sm font-bold flex items-center gap-2">
+                                    <i class="far fa-clock"></i> 7:00 PM
+                                </span>
+                                <span class="text-[#8a8d91] text-xs font-medium italic">Evening Return</span>
+                            </div>
+                            <div class="flex justify-between items-end mb-2">
+                                <span class="text-sm"><strong>30</strong> <span class="text-[#8a8d91]">/ 80 seats</span></span>
+                                <span class="text-[#f7a01b] font-bold">38%</span>
+                            </div>
+                            <div class="w-full bg-[#0f1115] h-2 rounded-full overflow-hidden">
+                                <div class="bg-[#f7a01b] h-full rounded-full opacity-60" style="width: 38%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center">
+                    <div class="flex gap-3">
+                        <button class="bg-[#1c1e26] border border-[#2d3036] px-4 py-2 rounded-lg text-xs font-semibold hover:bg-[#262a33] flex items-center gap-2 transition-all">
+                            <i class="far fa-calendar text-[#f7a01b]"></i> Feb 8, 2026
+                        </button>
+                        <button class="bg-[#1c1e26] border border-[#2d3036] px-4 py-2 rounded-lg text-xs font-semibold hover:bg-[#262a33] flex items-center gap-2 transition-all">
+                            <i class="fas fa-filter text-[#f7a01b]"></i> Filter
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-[#16181d] border border-[#2d3036] rounded-2xl overflow-hidden shadow-2xl">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-[#1c1e26] text-[#8a8d91] text-[11px] uppercase tracking-widest border-b border-[#2d3036]">
+                                <th class="px-6 py-5 font-bold">Trip ID</th>
+                                <th class="px-6 py-5 font-bold">Route & Pickup</th>
+                                <th class="px-6 py-5 font-bold">Driver</th>
+                                <th class="px-6 py-5 font-bold">Schedule</th>
+                                <th class="px-6 py-5 font-bold text-center">Seats</th>
+                                <th class="px-6 py-5 font-bold">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-[#2d3036]/50">
+                            <tr class="hover:bg-white/[0.02] transition-colors group">
+                                <td class="px-6 py-5 font-mono text-[#f7a01b] text-sm">T-001</td>
+                                <td class="px-6 py-5">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-[#8a8d91]">
+                                            <i class="fas fa-map-marker-alt text-xs"></i>
+                                        </div>
+                                        <span class="text-sm font-medium">Aqaleem <span class="text-[#2d3036] mx-1">→</span> Stadium</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5 text-sm text-[#8a8d91]">Ahmad Hassan</td>
+                                <td class="px-6 py-5 text-xs">
+                                    <span class="bg-[#0f1115] px-2 py-1 rounded text-white border border-[#2d3036]">7:30 AM</span>
+                                    <span class="mx-2 text-[#2d3036]">→</span>
+                                    <span class="bg-[#0f1115] px-2 py-1 rounded text-white border border-[#2d3036]">7:55 AM</span>
+                                </td>
+                                <td class="px-6 py-5 text-center">
+                                    <span class="text-xs bg-[#f7a01b]/5 text-[#f7a01b] px-3 py-1.5 rounded-full font-bold">
+                                        <i class="fas fa-users mr-1"></i> 32/40
+                                    </span>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <span class="border border-[#f7a01b]/40 text-[#f7a01b] px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Completed</span>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-white/[0.02] transition-colors group">
+                                <td class="px-6 py-5 font-mono text-[#f7a01b] text-sm">T-002</td>
+                                <td class="px-6 py-5">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-[#8a8d91]">
+                                            <i class="fas fa-map-marker-alt text-xs"></i>
+                                        </div>
+                                        <span class="text-sm font-medium">Seil <span class="text-[#2d3036] mx-1">→</span> Stadium</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5 text-sm text-[#8a8d91]">Omar Khalil</td>
+                                <td class="px-6 py-5 text-xs">
+                                    <span class="bg-[#0f1115] px-2 py-1 rounded text-white border border-[#2d3036]">7:45 AM</span>
+                                    <span class="mx-2 text-[#2d3036]">→</span>
+                                    <span class="bg-[#0f1115] px-2 py-1 rounded text-white border border-[#2d3036]">8:03 AM</span>
+                                </td>
+                                <td class="px-6 py-5 text-center">
+                                    <span class="text-xs bg-[#00ff88]/5 text-[#00ff88] px-3 py-1.5 rounded-full font-bold">
+                                        <i class="fas fa-users mr-1"></i> 28/40
+                                    </span>
+                                </td>
+                                <td class="px-6 py-5">
+                                    <span class="bg-[#00ff88] text-black px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest flex items-center gap-1 w-fit">
+                                        <span class="w-1 h-1 bg-black rounded-full animate-ping"></span> Active
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+</body>
+</html>

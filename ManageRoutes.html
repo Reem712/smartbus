@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartBus | Routes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #0f1115; }
+        ::-webkit-scrollbar-thumb { background: #2d3036; border-radius: 10px; }
+        
+        /* إخفاء المودال بشكل افتراضي */
+        .modal-hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body class="bg-[#0f1115] text-white h-screen overflow-hidden">
+
+    <div id="addRouteModal" class="modal-hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="toggleModal()"></div>
+        
+        <div class="bg-[#1c1e26] border border-[#2d3036] w-full max-w-md rounded-2xl relative z-10 shadow-2xl overflow-hidden">
+            <div class="p-6 border-b border-[#2d3036] flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="bg-[#f7a01b]/20 p-2 rounded-lg text-[#f7a01b]">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <h2 class="text-xl font-bold">Add New Route</h2>
+                </div>
+                <button onclick="toggleModal()" class="text-[#8a8d91] hover:text-white transition-colors">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="p-6 space-y-5">
+                <div>
+                    <label class="block text-[#8a8d91] text-[0.7rem] uppercase font-bold tracking-widest mb-2">Route Name</label>
+                    <input type="text" placeholder="e.g. Aqaleem → Stadium" class="w-full bg-[#0f1115] border border-[#2d3036] rounded-xl px-4 py-3 outline-none focus:border-[#f7a01b] transition-all text-sm">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[#8a8d91] text-[0.7rem] uppercase font-bold tracking-widest mb-2">Distance</label>
+                        <input type="text" placeholder="e.g. 12.5 km" class="w-full bg-[#0f1115] border border-[#2d3036] rounded-xl px-4 py-3 outline-none focus:border-[#f7a01b] transition-all text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-[#8a8d91] text-[0.7rem] uppercase font-bold tracking-widest mb-2">Est. Duration</label>
+                        <div class="relative">
+                            <input type="text" placeholder="e.g. 25 min" class="w-full bg-[#0f1115] border border-[#2d3036] rounded-xl px-4 py-3 outline-none focus:border-[#f7a01b] transition-all text-sm">
+                            <i class="far fa-clock absolute right-4 top-1/2 -translate-y-1/2 text-[#8a8d91]"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <label class="text-[#8a8d91] text-[0.7rem] uppercase font-bold tracking-widest">Pickup Points</label>
+                        <button class="text-[#f7a01b] text-[0.7rem] font-bold hover:underline">+ Add Stop</button>
+                    </div>
+                    <div class="flex items-center gap-3 bg-[#0f1115] border border-[#2d3036] rounded-xl px-4 py-3">
+                        <i class="fas fa-circle-notch text-[10px] text-[#f7a01b]"></i>
+                        <input type="text" placeholder="Stop 1" class="bg-transparent border-none outline-none text-sm w-full">
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6 bg-[#16181d] border-t border-[#2d3036] flex justify-end gap-3">
+                <button onclick="toggleModal()" class="px-5 py-2.5 text-[#8a8d91] font-bold text-sm hover:text-white transition-colors">Cancel</button>
+                <button class="bg-[#f7a01b] text-black px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-[#f7a01b]/90 transition-all shadow-lg shadow-[#f7a01b]/10">
+                    Create Route
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex h-full w-full">
+        <aside class="w-[260px] min-w-[260px] bg-[#16181d] border-r border-[#2d3036] flex flex-col p-[25px]">
+            <div class="text-[#f7a01b] text-[1.5rem] font-bold mb-[40px] flex items-center gap-3">
+                <i class="fas fa-bus"></i>
+                <span>SmartBus</span>
+            </div>
+            
+            <nav class="flex-1 overflow-y-auto">
+                <small class="text-[#8a8d91] text-[0.7rem] tracking-[1px] mb-[15px] block font-bold uppercase">Main</small>
+                <ul class="space-y-1">
+                    <li><a href="Dashboard.html" class="flex items-center gap-3 p-3 text-[#8a8d91] hover:bg-[#f7a01b]/10 hover:text-[#f7a01b] rounded-lg transition-all"><i class="fas fa-th-large w-5"></i> Dashboard</a></li>
+                    <li><a href="users.html" class="flex items-center gap-3 p-3 text-[#8a8d91] hover:bg-[#f7a01b]/10 hover:text-[#f7a01b] rounded-lg transition-all"><i class="fas fa-users w-5"></i> Users</a></li>
+                    <li class="bg-[#f7a01b]/10 rounded-lg"><a href="ManageRoutes.html" class="flex items-center gap-3 p-3 text-[#f7a01b] font-semibold"><i class="fas fa-route w-5"></i> Routes</a></li>
+                    <li><a href="trips.html" class="flex items-center gap-3 p-3 text-[#8a8d91] hover:bg-[#f7a01b]/10 hover:text-[#f7a01b] rounded-lg transition-all"><i class="fas fa-bus-alt w-5"></i> Trips</a></li>
+                    <li><a href="notification.html" class="flex items-center gap-3 p-3 text-[#8a8d91] hover:bg-[#f7a01b]/10 hover:text-[#f7a01b] rounded-lg transition-all"><i class="fas fa-bell w-5"></i> Notifications</a></li>
+                    <li><a href="report.html" class="flex items-center gap-3 p-3 text-[#8a8d91] hover:bg-[#f7a01b]/10 hover:text-[#f7a01b] rounded-lg transition-all"><i class="fas fa-chart-bar w-5"></i> Reports</a></li>
+                </ul>
+            </nav>
+
+            <div class="pt-10 border-t border-[#2d3036] space-y-1 mt-auto"> 
+                <div class="flex items-center gap-3 p-2 text-[#8a8d91] cursor-pointer hover:text-white transition-colors text-sm">
+                    <i class="fas fa-cog w-5"></i><a href="settings.html">Settings</a>
+                </div>
+                <div class="flex items-center gap-3 p-2 text-[#ff4d4d] cursor-pointer hover:opacity-80 transition-opacity text-sm font-semibold">
+                    <i class="fas fa-sign-out-alt w-5"></i><a href="sign-in.html">Logout</a>
+                </div>
+            </div>
+        </aside>
+
+        <main class="flex-1 flex flex-col overflow-hidden">
+            <header class="flex justify-between items-center px-10 min-h-[100px] flex-shrink-0">
+                <div>
+                    <h1 class="text-[1.8rem] font-bold">Routes</h1>
+                    <p class="text-[#8a8d91] text-[0.9rem]">Manage bus routes and pickup points</p>
+                </div>
+                
+                <div class="flex items-center gap-6">
+                    <div class="bg-[#1c1e26] border border-[#2d3036] px-4 py-2.5 rounded-xl flex items-center gap-3 w-[300px]">
+                        <i class="fas fa-search text-[#8a8d91]"></i>
+                        <input type="text" placeholder="Search routes..." class="bg-transparent border-none outline-none text-white w-full text-sm">
+                    </div>
+                    <button onclick="toggleModal()" class="bg-[#f7a01b] text-black font-bold px-5 py-2.5 rounded-lg hover:bg-[#f7a01b]/90 transition-all text-sm shadow-lg shadow-orange-500/10">
+                        + Add Route
+                    </button>
+                </div>
+            </header>
+
+            <section class="flex-1 overflow-y-auto px-10 pb-10">
+                <p class="text-[#8a8d91] text-sm mb-5 font-medium tracking-wide">3 routes configured</p>
+                
+                <div class="grid grid-cols-[420px_1fr] gap-6 h-[calc(100vh-220px)]">
+                    <div class="overflow-y-auto pr-2 space-y-4">
+                        <div class="bg-[#1c1e26]/50 border-l-4 border-l-[#f7a01b] border border-[#2d3036] p-5 rounded-xl cursor-pointer hover:border-[#f7a01b]/50 transition-all">
+                            <h3 class="text-[1.1rem] font-bold flex items-center gap-3 mb-1">
+                                <span class="w-2 h-2 rounded-full bg-[#f7a01b] animate-pulse"></span> Aqaleem → University
+                            </h3>
+                            <div class="text-[#8a8d91] text-xs mb-3">R-001 • 12.5 km • 40 min</div>
+                            <div class="flex flex-wrap items-center gap-2 mb-4">
+                                <span class="bg-white/5 px-2 py-1 rounded text-[10px] text-[#8a8d91]">Aqaleem Gate</span>
+                                <i class="fas fa-chevron-right text-[8px] text-[#2d3036]"></i>
+                                <span class="bg-white/5 px-2 py-1 rounded text-[10px] text-[#8a8d91]">Plaza Mall</span>
+                            </div>
+                            <div class="text-[#f7a01b] text-[10px] font-bold uppercase tracking-wider">3 active buses</div>
+                        </div>
+
+                        <div class="bg-[#1c1e26] border border-[#2d3036] p-5 rounded-xl cursor-pointer hover:border-[#f7a01b] transition-all">
+                            <h3 class="text-[1.1rem] font-bold flex items-center gap-3 mb-1">
+                                <span class="w-2 h-2 rounded-full bg-[#00ff88]"></span> Stadium → University
+                            </h3>
+                            <div class="text-[#8a8d91] text-xs mb-3">R-002 • 8.3 km • 25 min</div>
+                            <div class="text-[#f7a01b] text-[10px] font-bold uppercase tracking-wider">2 active buses</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#16181d] border border-[#2d3036] rounded-2xl relative overflow-hidden flex flex-col items-center justify-center text-[#8a8d91] group">
+                        <div class="absolute top-5 left-5 z-10">
+                            <span class="bg-black/60 backdrop-blur-md text-[#00ff88] px-4 py-1.5 rounded-full text-[0.7rem] font-bold border border-[#00ff88]/30 flex items-center gap-2">
+                                <span class="w-2 h-2 bg-[#00ff88] rounded-full animate-ping"></span> LIVE VISUALIZATION
+                            </span>
+                        </div>
+                        <i class="fas fa-map-marked-alt text-6xl mb-5 opacity-10 group-hover:scale-110 transition-transform duration-700"></i>
+                        <p class="font-medium tracking-wide text-sm">Interactive Map Interface</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function toggleModal() {
+            const modal = document.getElementById('addRouteModal');
+            modal.classList.toggle('modal-hidden');
+        }
+
+        // إغلاق المودال عند الضغط على مفتاح Esc
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.getElementById('addRouteModal').classList.add('modal-hidden');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" class="dark" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartBus Landing Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+        function toggleMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+        function toggleLang() {
+            const html = document.documentElement;
+            const langBtn = document.getElementById('lang-btn-text');
+            if (html.getAttribute('dir') === 'ltr') {
+                html.setAttribute('dir', 'rtl');
+                html.setAttribute('lang', 'ar');
+                langBtn.innerText = 'English';
+                translatePage('ar');
+            } else {
+                html.setAttribute('dir', 'ltr');
+                html.setAttribute('lang', 'en');
+                langBtn.innerText = 'العربية';
+                translatePage('en');
+            }
+        }
+        const translations = {
+            en: {
+                tagline: "Intelligent campus transportation management",
+                student_title: "Student Portal",
+                student_desc: "Book rides, track buses & manage your daily trips",
+                admin_title: "Admin Dashboard",
+                admin_desc: "Full system management, routes control & analytics",
+                signin: "Sign In",
+                copy: "SmartBus Transportation System © 2026"
+            },
+            ar: {
+                tagline: "إدارة ذكية لنقل الطلاب داخل الحرم الجامعي",
+                student_title: "بوابة الطالب",
+                student_desc: "احجز رحلاتك، تتبع الحافلات وأدر رحلاتك اليومية بسهولة",
+                admin_title: "لوحة تحكم المسؤول",
+                admin_desc: "إدارة كاملة للنظام، التحكم في المسارات والتحليلات",
+                signin: "تسجيل الدخول",
+                copy: "نظام سمارت باص للنقل © ٢٠٢٦"
+            }
+        };
+        function translatePage(lang) {
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                el.innerText = translations[lang][key];
+            });
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; transition: background-color 0.3s ease; }
+        html[lang="ar"] body { font-family: 'Cairo', sans-serif; }
+        .dark body { background-color: #0f1115; color: white; }
+        body { background-color: #f3f4f6; color: #1c1e26; }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <div class="fixed top-6 right-6 left-6 flex justify-end items-center gap-3 z-50">
+        <button onclick="toggleLang()" class="px-4 py-2 text-[11px] font-bold rounded-xl border border-gray-200 dark:border-[#2d3036] bg-white dark:bg-[#1c1e26] text-[#f7a01b] shadow-sm transition-all hover:scale-105">
+            <i class="fas fa-language text-sm mr-1"></i> <span id="lang-btn-text">العربية</span>
+        </button>
+        <button onclick="toggleMode()" class="p-2 w-10 h-10 rounded-xl bg-white dark:bg-[#1c1e26] border border-gray-200 dark:border-[#2d3036] text-[#f7a01b] shadow-sm transition-all hover:scale-110 flex items-center justify-center">
+            <i class="fas fa-sun hidden dark:block"></i>
+            <i class="fas fa-moon dark:hidden text-gray-400"></i>
+        </button>
+    </div>
+
+    <div class="min-h-screen w-full flex justify-center items-center p-5">
+        
+        <div class="w-full max-w-[800px] text-center">
+            
+            <header class="flex items-center justify-center gap-4 mb-3">
+                <div class="w-16 h-16 bg-[#f7a01b] text-black rounded-[20px] flex items-center justify-center shadow-lg shadow-orange-500/20">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" width="20" height="12" rx="2" y="4"></rect>
+                        <path d="M7 16v2"></path>
+                        <path d="M17 16v2"></path>
+                        <path d="M2 10h20"></path>
+                    </svg>
+                </div>
+                <h1 class="text-[2.5rem] font-bold tracking-tight dark:text-white text-slate-900">Smart<span class="text-[#f7a01b]">Bus</span></h1>
+            </header>
+
+            <p class="text-[#8a8d91] text-lg mb-12" data-key="tagline">Intelligent campus transportation management</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <div class="group bg-white dark:bg-[#1c1e26] border border-gray-200 dark:border-[#2d3036] p-10 rounded-[32px] text-left rtl:text-right transition-all duration-300 hover:-translate-y-2 hover:border-[#f7a01b] hover:shadow-2xl hover:shadow-orange-500/5">
+                    <div class="w-12 h-12 rounded-[14px] bg-[#f7a01b]/10 text-[#f7a01b] flex items-center justify-center mb-5">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </div>
+                    <h3 class="text-[1.2rem] font-bold mb-2 dark:text-white text-slate-900" data-key="student_title">Student Portal</h3>
+                    <p class="text-[#8a8d91] text-[0.9rem] leading-relaxed mb-6" data-key="student_desc">Book rides, track buses & manage your daily trips</p>
+                    <a href="sign-in.html" class="text-[#f7a01b] font-semibold flex items-center gap-2 group-hover:gap-4 transition-all">
+                        <span data-key="signin">Sign In</span> <span class="transition-transform rtl:rotate-180">→</span>
+                    </a>
+                </div>
+
+                <div class="group bg-white dark:bg-[#1c1e26] border border-gray-200 dark:border-[#2d3036] p-10 rounded-[32px] text-left rtl:text-right transition-all duration-300 hover:-translate-y-2 hover:border-[#00ff88] hover:shadow-2xl hover:shadow-green-500/5">
+                    <div class="w-12 h-12 rounded-[14px] bg-[#00ff88]/10 text-[#00ff88] flex items-center justify-center mb-5">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-[1.2rem] font-bold mb-2 dark:text-white text-slate-900" data-key="admin_title">Admin Dashboard</h3>
+                    <p class="text-[#8a8d91] text-[0.9rem] leading-relaxed mb-6" data-key="admin_desc">Full system management, routes control & analytics</p>
+                    <a href="sign-in.html" class="text-[#00ff88] font-semibold flex items-center gap-2 group-hover:gap-4 transition-all">
+                        <span data-key="signin">Sign In</span> <span class="transition-transform rtl:rotate-180">→</span>
+                    </a>
+                </div>
+
+            </div>
+
+            <footer class="mt-16 text-[#8a8d91] text-[10px] font-bold tracking-widest uppercase opacity-60" data-key="copy">
+                SmartBus Transportation System © 2026
+            </footer>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartBus Dashboard - Tailwind</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #0d0e12; }
+        ::-webkit-scrollbar-thumb { background: #26292f; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-[#0d0e12] text-white h-screen overflow-hidden ">
+
+    <div class="flex h-full">
+         <aside
+        class="w-64 bg-[#0d0e12] border-r border-white/5 flex flex-col p-6 shrink-0"
+      >
+        <div
+          class="flex items-center gap-3 text-[#f7a01b] font-bold text-xl mb-10 px-2"
+        >
+          <div
+            class="w-8 h-8 bg-[#f7a01b] text-black rounded-lg flex items-center justify-center"
+          >
+            <i class="fas fa-bus text-sm"></i>
+          </div>
+          SmartBus
+        </div>
+
+        <nav class="flex-1 space-y-4 overflow-y-auto pr-2">
+          <span
+            class="text-[10px] text-gray-600 tracking-[0.2em] uppercase px-2 mb-2 block font-bold"
+            >Menu</span
+          >
+
+          <ul class="space-y-1.5">
+
+            <li><a href="userdashboard.html"class="flex items-center gap-4 p-3 rounded-xl bg-[#f7a01b]/10 text-[#f7a01b] text-sm font-bold shadow-sm shadow-orange-500/5"> <i class="far fa-calendar-plus w-5"></i> Dashboard</a > </li>
+
+            <li><a href="BookTrips.html"class="flex items-center gap-4 p-3 rounded-xl text-gray-500 hover:bg-white/5 transition text-sm"><i class="fas fa-th-large w-5"></i> Book trip</a > </li>
+            
+            <li><a href="MyTrips.html" class="flex items-center gap-4 p-3 rounded-xl text-gray-500 hover:bg-white/5 transition text-sm"> <i class="fas fa-history w-5"></i> My Trips</a ></li>
+
+            <li><a href="Route_Details.html" class="flex items-center gap-4 p-3 rounded-xl text-gray-500 hover:bg-white/5 transition text-sm" > <i class="fas fa-info-circle w-5"></i> Route Details</a > </li>
+
+            <li><a href="trackbus.html" class="flex items-center gap-4 p-3 rounded-xl text-gray-500 hover:bg-white/5 transition text-sm" ><i class="fas fa-map-marked-alt w-5"></i> Track Bus</a ></li>
+
+            <li><a href="attendance.html" class="flex items-center gap-4 p-3 rounded-xl text-gray-500 hover:bg-white/5 transition text-sm" >  <i class="fas fa-user-check w-5"></i> Attendance</a ></li>
+
+            <li><a href="#" class="flex items-center gap-4 p-3 rounded-xl text-gray-500 hover:bg-white/5 transition text-sm justify-between"> <span class="flex items-center gap-4" ><i class="far fa-bell w-5"></i> Notification</span></a></li>
+            
+            <li><a href="chat.html" class="flex items-center gap-4 p-3 rounded-xl text-gray-500 hover:bg-white/5 transition text-sm"  ><i class="far fa-comments w-5"></i> Route Chat</a></li>
+         
+        </ul>
+        </nav>
+
+        <div class="border-t border-white/5 pt-6 space-y-1">
+          <a
+            href="settings.html"
+            class="flex items-center gap-3 p-3 text-gray-500 text-sm hover:text-white transition"
+            ><i class="fas fa-cog w-5"></i>  Settings</a
+          >
+          <a
+            href="sign-in.html"
+            class="flex items-center gap-3 p-3 text-red-500/80 text-sm hover:text-red-500 transition"
+            ><i class="fas fa-sign-out-alt w-5"></i> Logout</a
+          >
+        </div>
+      </aside>
+
+<main class="flex-1 overflow-y-auto bg-[#0d0e12] flex flex-col">
+    
+    <header class="flex justify-between items-center py-6 px-10 border-b border-white/5">
+        <div>
+            <h1 class="text-xl font-bold italic">Dashboard</h1>
+            <p class="text-gray-400 text-[11px]">Welcome back, Retaj</p>
+        </div>
+
+        <div class="flex items-center gap-6">
+            <div class="relative text-gray-400 text-lg cursor-pointer">
+                <i class="far fa-bell"></i>
+                <span class="absolute -top-1 -right-1 bg-red-500 text-[9px] w-3.5 h-3.5 rounded-full flex items-center justify-center text-white font-bold">2</span>
+            </div>
+            <div class="flex items-center gap-3 bg-[#1a1c22] border border-[#26292f] px-3 py-1.5 rounded-xl shadow-lg">
+                <div class="w-8 h-8 bg-[#f7a01b] text-black font-bold rounded flex items-center justify-center text-xs">R</div>
+                <div class="text-[10px]">
+                    <span class="block font-semibold leading-tight text-white">Retaj Yasser</span>
+                    <span class="text-gray-500 text-[9px]">STU-001</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex justify-start">
+        <div class="w-full max-w-4xl px-10 py-8">
+            
+            <section class="bg-[#1a1c22] border border-[#26292f] rounded-2xl p-6 mb-8 shadow-xl relative overflow-hidden">
+                <div class="flex justify-between items-center mb-5">
+                    <span class="text-[10px] text-gray-500 tracking-widest font-bold">NEXT TRIP</span>
+                    <span class="bg-[#26292f] text-gray-400 px-3 py-1 rounded-full text-[10px] border border-white/5">Not Started</span>
+                </div>
+                
+                <h2 class="text-xl font-bold mb-6 flex items-center gap-3">
+                    <i class="fas fa-map-marker-alt text-[#f7a01b]"></i> Aqaleem <span class="text-gray-600 font-normal">→</span> Stadium
+                </h2>
+                
+                <div class="grid grid-cols-4 gap-3 mb-6">
+                    <div class="bg-black/20 p-4 rounded-xl border border-white/5">
+                        <span class="block text-gray-500 text-[9px] mb-1 font-bold">PICKUP</span>
+                        <strong class="text-[12px] block truncate text-gray-200 uppercase">Al aqaleem </strong>
+                    </div>
+                    <div class="bg-black/20 p-4 rounded-xl border border-white/5">
+                        <span class="block text-gray-500 text-[9px] mb-1 font-bold">BUS</span>
+                        <strong class="text-[12px] block text-gray-200">BUS-12</strong>
+                    </div>
+                    <div class="bg-black/20 p-4 rounded-xl border border-white/5">
+                        <span class="block text-gray-500 text-[9px] mb-1 font-bold uppercase">Departure</span>
+                        <strong class="text-[12px] block text-[#f7a01b]">7:30 AM</strong>
+                    </div>
+                    <div class="bg-black/20 p-4 rounded-xl border border-white/5">
+                        <span class="block text-gray-500 text-[9px] mb-1 font-bold uppercase">Return</span>
+                        <strong class="text-[12px] block text-gray-200">3:30 PM</strong>
+                    </div>
+                </div>
+
+                <p class="text-gray-500 text-[11px] mb-6"><i class="far fa-calendar-alt mr-2 text-[#f7a01b]"></i> Tomorrow, Sun</p>
+                <button class="w-full bg-[#f7a01b] hover:bg-[#ffb341] text-black font-bold py-4 rounded-xl text-sm transition-all shadow-lg shadow-orange-500/10 flex items-center justify-center gap-2">
+                    <i class="fas fa-paper-plane text-xs"></i> Track Bus
+                </button>
+            </section>
+
+            <div class="grid grid-cols-4 gap-4 mb-10">
+                <div class="bg-[#1a1c22] border border-[#26292f] p-5 rounded-2xl hover:border-[#f7a01b] cursor-pointer transition-all hover:-translate-y-1">
+                    <i class="far fa-calendar-alt text-[#f7a01b] text-xl mb-3 block"></i>
+                    <h3 class="text-xs font-bold text-white "> <a href="BookTrips.html">Book Trip</a></h3>
+                    <p class="text-[10px] text-gray-500">Register now</p>
+                </div>
+                <div class="bg-[#1a1c22] border border-[#26292f] p-5 rounded-2xl hover:border-[#f7a01b] cursor-pointer transition-all hover:-translate-y-1">
+                    <i class="fas fa-book-open text-[#f7a01b] text-xl mb-3 block"></i>
+                    <h3 class="text-xs font-bold text-white"> <a href="myTrips.html">My Trips</a></h3>
+                    <p class="text-[10px] text-gray-500">View all</p>
+                </div>
+                <div class="bg-[#1a1c22] border border-[#26292f] p-5 rounded-2xl hover:border-green-500 cursor-pointer transition-all hover:-translate-y-1">
+                    <i class="far fa-comments text-green-500 text-xl mb-3 block"></i>
+                    <h3 class="text-xs font-bold text-white"> <a href="chat.html">Route Chat</a></h3>
+                    <p class="text-[10px] text-gray-500">Group</p>
+                </div>
+                <div class="bg-[#1a1c22] border border-[#26292f] p-5 rounded-2xl hover:border-red-500 cursor-pointer transition-all hover:-translate-y-1">
+                    <i class="far fa-bell text-red-500 text-xl mb-3 block"></i>
+                    <h3 class="text-xs font-bold text-white">Alerts</h3>
+                    <p class="text-[10px] text-gray-500 text-white">2 new</p>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center mb-5">
+                <h2 class="text-sm font-bold text-white tracking-tight">Upcoming Trips</h2>
+                <a href="myTrips.html" class="text-[#f7a01b] text-[11px] font-semibold hover:underline flex items-center gap-1">View All <i class="fas fa-chevron-right text-[8px]"></i></a>
+            </div>
+
+            <div class="space-y-3">
+                <div class="bg-[#1a1c22] border border-[#26292f] p-4 rounded-2xl flex justify-between items-center group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-[#f7a01b]/10 text-[#f7a01b] rounded-xl flex items-center justify-center italic font-bold text-xs">B</div>
+                        <div>
+                            <h4 class="text-[13px] font-semibold text-white">Aqaleem &rarr; Stadium</h4>
+                            <p class="text-[11px] text-gray-500 font-medium">Tomorrow, Sun • 7:30 AM</p>
+                        </div>
+                    </div>
+                    <span class="text-[10px] text-gray-500 bg-[#26292f] px-3 py-1 rounded-full border border-white/5 font-bold tracking-tight">Not Started</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex-1 hidden xl:block"></div>
+    </div>
+</main>
+
+    </div>
+
+</body>
+</html>

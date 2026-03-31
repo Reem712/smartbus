@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartBus - My Trips</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        accent: '#f59e0b',
+                        success: '#10b981',
+                        danger: '#ef4444',
+                        'bg-dark-app': '#0a0a0c',
+                        'bg-dark-side': '#111216',
+                        'bg-dark-card': '#16171d',
+                        'bg-dark-pill': '#1c1e26',
+                        'border-dark': '#1f2128'
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #1f2128; border-radius: 10px; }
+        
+        /* Custom Sidebar Active State matching the Image */
+        .sidebar-active {
+            background: linear-gradient(90deg, rgba(245, 158, 11, 0.15) 0%, rgba(245, 158, 11, 0) 100%);
+            border-left: 3px solid #f59e0b;
+            color: #f59e0b !important;
+        }
+    </style>
+</head>
+<body class="bg-[#f8fafc] dark:bg-bg-dark-app text-[#0f172a] dark:text-white antialiased text-[14px] transition-colors duration-300">
+    
+    <div class="flex h-screen overflow-hidden">
+        
+        <aside class="hidden md:flex w-[210px] bg-white dark:bg-bg-dark-side border-r border-[#e2e8f0] dark:border-border-dark flex-col justify-between">
+            <div>
+                <div class="flex items-center gap-2.5 px-4 py-5 mb-4">
+                    <div class="bg-accent text-black p-1.5 rounded-md text-base leading-none">
+                        <i class="ph-fill ph-bus"></i>
+                    </div>
+                    <div>
+                        <span class="font-bold text-[0.85rem] block">SmartBus</span>
+                        <span class="text-[0.65rem] text-slate-500 dark:text-slate-400 block -mt-0.5">Student Portal</span>
+                    </div>
+                </div>
+
+                <nav>
+                    <div class="text-[0.6rem] font-bold text-slate-400 dark:text-[#4a4d5a] px-4 mb-2 tracking-wider uppercase">Main</div>
+                    <ul class="space-y-0.5">
+                        <li><a href="userdashboard.html" class="flex items-center gap-2.5 px-4 py-2 text-[0.8rem] text-slate-500 hover:text-accent transition-colors"><i class="ph ph-squares-four text-lg"></i> Dashboard</a></li>
+                        <li><a href="BookTrips.html" class="flex items-center gap-2.5 px-4 py-2 text-[0.8rem] text-slate-500 hover:text-accent transition-colors"><i class="ph ph-book-open text-lg"></i> Book Trip</a></li>
+                        <li>
+                            <a href="myTrips.html" class="flex items-center gap-2.5 px-4 py-2 text-[0.8rem] text-accent bg-accent/5 border-r-2 border-accent">
+                                <i class="ph-fill ph-bus text-lg"></i> My Trips
+                            </a>
+                        </li>
+                        <li><a href="Route_Details.html" class="flex items-center gap-2.5 px-4 py-2 text-[0.8rem] text-slate-500 hover:text-accent transition-colors"><i class="ph ph-map-trifold text-lg"></i> Route Details</a></li>
+                        <li><a href="attendance.html" class="flex items-center gap-2.5 px-4 py-2 text-[0.8rem] text-slate-500 hover:text-accent transition-colors"><i class="ph ph-chart-bar text-lg"></i> Attendance</a></li>
+                        <li><a href="trackbus.html" class="flex items-center gap-2.5 px-4 py-2 text-[0.8rem] text-slate-500 hover:text-accent transition-colors"><i class="ph ph-navigation-arrow text-lg"></i> Track Bus</a></li>
+                        <li><a href="#" class="flex items-center gap-2.5 px-4 py-2 text-[0.8rem] text-slate-500 hover:text-accent transition-colors"><i class="ph ph-bell text-lg"></i> Notifications</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="p-4 border-t border-[#e2e8f0] dark:border-border-dark">
+                <a href="Support.html" class="flex items-center gap-2.5 py-1.5 text-[0.8rem] text-slate-500 hover:text-white transition-colors">
+                    <i class="ph ph-question text-lg"></i> Support
+                </a>
+                <a href="settings.html" class="flex items-center gap-2.5 py-1.5 text-[0.8rem] text-slate-500 hover:text-white transition-colors">
+                    <i class="ph ph-gear text-lg"></i> Settings
+                </a>
+                <a href="sign-in.html" class="flex items-center gap-2.5 py-1.5 text-[0.8rem] text-red-500 hover:text-red-400 transition-colors mt-0.5">
+                    <i class="ph ph-sign-out text-lg"></i> Logout
+                </a>
+            </div>
+        </aside>
+
+        <main class="flex-1 flex flex-col overflow-hidden">
+            <header class="h-16 flex items-center justify-between px-4 md:px-8 border-b border-[#e2e8f0] dark:border-border-dark bg-white dark:bg-transparent">
+                <div>
+                    <h1 class="text-lg font-semibold leading-none">My Trips</h1>
+                    <p class="text-[0.75rem] text-slate-500 mt-1">Manage your weekly transportation</p>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <div class="hidden sm:flex items-center gap-2 bg-slate-50 dark:bg-bg-dark-card border border-[#e2e8f0] dark:border-border-dark px-3 py-1.5 rounded-md">
+                        <i class="ph ph-magnifying-glass text-slate-400"></i>
+                        <input type="text" placeholder="Search trips..." class="bg-transparent border-none outline-none text-[0.75rem] w-32 dark:text-white">
+                    </div>
+                    <button onclick="toggleTheme()" class="text-slate-500 text-lg hover:text-accent p-1">
+                        <i id="theme-icon" class="ph ph-moon-stars"></i>
+                    </button>
+                    <div class="relative cursor-pointer">
+                        <i class="ph ph-bell text-xl text-slate-500"></i>
+                        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full border-2 border-white dark:border-bg-dark-app">2</span>
+                    </div>
+                    <div class="flex items-center gap-2.5 bg-white dark:bg-bg-dark-pill border border-[#e2e8f0] dark:border-border-dark p-1 pr-3 rounded-lg cursor-pointer">
+                        <div class="w-7 h-7 bg-slate-700 dark:bg-slate-800 text-white flex items-center justify-center rounded-md text-[0.7rem] font-bold">S</div>
+                        <div class="hidden lg:block leading-tight">
+                            <span class="text-[0.75rem] font-semibold block text-[#0f172a] dark:text-white">Sara Ahmed</span>
+                            <span class="text-[0.65rem] text-slate-500 dark:text-slate-400 block">STU-001</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="flex-1 overflow-y-auto p-4 md:p-8 space-y-6">
+                
+                <div class="bg-slate-200/50 dark:bg-bg-dark-pill/40 p-1 rounded-xl flex w-full max-w-lg mb-8 border border-slate-200 dark:border-white/5 transition-colors duration-200">
+                    <button class="flex-1 py-2 text-[12px] text-slate-500 font-medium"> <a href="myTrips.html">Upcoming (3)</a></button>
+                    <button class="flex-1 py-2 text-[12px] font-bold bg-white dark:bg-bg-dark-pill border border-slate-300 dark:border-white/10 rounded-lg shadow-sm text-slate-900 dark:text-white">Completed (2)</button>
+                    <button class="flex-1 py-2 text-[12px] text-slate-500 font-medium"> <a href="myTrips3.html">Missed (2)</a></button>
+                </div>
+
+                <div class="space-y-4 max-w-4xl">
+                    
+                    <div class="bg-white dark:bg-bg-dark-card border border-[#e2e8f0] dark:border-border-dark rounded-2xl p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <div class="flex items-center gap-2.5 text-slate-400">
+                                <i class="ph ph-calendar text-lg"></i>
+                                <span class="text-[0.8rem] font-medium">Sat, Feb 22</span>
+                            </div>
+                            <span class="text-[0.65rem] font-bold bg-accent/10 border border-accent/20 px-3 py-1 rounded-full text-accent uppercase">Completed</span>
+                        </div>
+
+                        <div class="flex items-center gap-2 mb-6">
+                            <i class="ph-fill ph-map-pin text-accent text-lg"></i>
+                            <h3 class="text-[0.95rem] font-bold">Aqaleem <span class="text-slate-400 mx-1 font-light">→</span> Stadium</h3>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-3 mb-10">
+                            <div class="bg-slate-50 dark:bg-bg-dark-pill/50 p-3 rounded-xl border border-slate-100 dark:border-white/5">
+                                <p class="text-[0.6rem] text-slate-500 uppercase font-bold tracking-wider mb-0.5">Pickup</p>
+                                <p class="text-[0.8rem] font-bold">Al-Rawda Square</p>
+                            </div>
+                            <div class="bg-slate-50 dark:bg-bg-dark-pill/50 p-3 rounded-xl border border-slate-100 dark:border-white/5">
+                                <p class="text-[0.6rem] text-slate-500 uppercase font-bold tracking-wider mb-0.5">Bus</p>
+                                <p class="text-[0.8rem] font-bold">BUS-12</p>
+                            </div>
+                            <div class="bg-slate-50 dark:bg-bg-dark-pill/50 p-3 rounded-xl border border-slate-100 dark:border-white/5">
+                                <p class="text-[0.6rem] text-slate-500 uppercase font-bold tracking-wider mb-0.5">Return</p>
+                                <p class="text-[0.8rem] font-bold">3:30 PM</p>
+                            </div>
+                        </div>
+
+                        <div class="relative flex justify-between items-center px-4 md:px-10">
+                            <div class="absolute top-[17px] left-10 right-10 h-[2px] bg-accent/20 -z-0">
+                                <div class="h-full bg-accent w-full"></div>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 z-10">
+                                <div class="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-black text-xs font-bold"><i class="ph ph-check"></i></div>
+                                <span class="text-[0.65rem] font-bold text-accent">Scheduled</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 z-10">
+                                <div class="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-black text-xs font-bold"><i class="ph ph-check"></i></div>
+                                <span class="text-[0.65rem] font-bold text-accent">Boarding</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 z-10">
+                                <div class="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-black text-xs font-bold"><i class="ph ph-check"></i></div>
+                                <span class="text-[0.65rem] font-bold text-accent">On Route</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 z-10">
+                                <div class="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-black ring-4 ring-bg-dark-card border-2 border-accent">
+                                    <div class="w-1.5 h-1.5 rounded-full bg-black"></div>
+                                </div>
+                                <span class="text-[0.65rem] font-bold text-accent">Arrived</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white dark:bg-bg-dark-card border border-[#e2e8f0] dark:border-border-dark rounded-2xl p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <div class="flex items-center gap-2.5 text-slate-400">
+                                <i class="ph ph-calendar text-lg"></i>
+                                <span class="text-[0.8rem] font-medium">Thu, Feb 20</span>
+                            </div>
+                            <span class="text-[0.65rem] font-bold bg-accent/10 border border-accent/20 px-3 py-1 rounded-full text-accent uppercase">Completed</span>
+                        </div>
+
+                        <div class="flex items-center gap-2 mb-6">
+                            <i class="ph-fill ph-map-pin text-accent text-lg"></i>
+                            <h3 class="text-[0.95rem] font-bold">Aqaleem <span class="text-slate-400 mx-1 font-light">→</span> Stadium</h3>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-3 mb-10">
+                            <div class="bg-slate-50 dark:bg-bg-dark-pill/50 p-3 rounded-xl border border-slate-100 dark:border-white/5">
+                                <p class="text-[0.6rem] text-slate-500 uppercase font-bold tracking-wider mb-0.5">Pickup</p>
+                                <p class="text-[0.8rem] font-bold">Al-Rawda Square</p>
+                            </div>
+                            <div class="bg-slate-50 dark:bg-bg-dark-pill/50 p-3 rounded-xl border border-slate-100 dark:border-white/5">
+                                <p class="text-[0.6rem] text-slate-500 uppercase font-bold tracking-wider mb-0.5">Bus</p>
+                                <p class="text-[0.8rem] font-bold">BUS-12</p>
+                            </div>
+                            <div class="bg-slate-50 dark:bg-bg-dark-pill/50 p-3 rounded-xl border border-slate-100 dark:border-white/5">
+                                <p class="text-[0.6rem] text-slate-500 uppercase font-bold tracking-wider mb-0.5">Return</p>
+                                <p class="text-[0.8rem] font-bold">7:00 PM</p>
+                            </div>
+                        </div>
+
+                        <div class="relative flex justify-between items-center px-4 md:px-10">
+                            <div class="absolute top-[17px] left-10 right-10 h-[2px] bg-accent/20 -z-0">
+                                <div class="h-full bg-accent w-full"></div>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 z-10">
+                                <div class="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-black text-xs font-bold"><i class="ph ph-check"></i></div>
+                                <span class="text-[0.65rem] font-bold text-accent">Scheduled</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 z-10">
+                                <div class="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-black text-xs font-bold"><i class="ph ph-check"></i></div>
+                                <span class="text-[0.65rem] font-bold text-accent">Boarding</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 z-10">
+                                <div class="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-black text-xs font-bold"><i class="ph ph-check"></i></div>
+                                <span class="text-[0.65rem] font-bold text-accent">On Route</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2 z-10">
+                                <div class="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-black ring-4 ring-bg-dark-card border-2 border-accent">
+                                    <div class="w-1.5 h-1.5 rounded-full bg-black"></div>
+                                </div>
+                                <span class="text-[0.65rem] font-bold text-accent">Arrived</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            html.classList.toggle('dark');
+            icon.className = html.classList.contains('dark') ? 'ph ph-moon-stars' : 'ph ph-sun';
+        }
+    </script>
+</body>
+</html>

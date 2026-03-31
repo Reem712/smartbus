@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" id="html-tag" class="dark">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartBus - My Trips</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0d0f11',
+                        sidebarBg: '#0e1114',
+                        accent: '#f9b233',
+                        cardBg: '#161a1f',
+                        textGray: '#8a8d91',
+                        success: '#3ddc97',
+                        danger: '#ff4d4d'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        body { transition: background-color 0.3s ease, color 0.3s ease; }
+        .active-glow { box-shadow: 0 0 15px rgba(249, 178, 51, 0.3); }
+        
+        /* انسيابية القائمة الجانبية في الموبايل */
+        @media (max-width: 1024px) {
+            #sidebar { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        }
+    </style>
+</head>
+
+<body class="bg-[#f3f4f6] dark:bg-darkBg text-gray-900 dark:text-white font-inter overflow-x-hidden transition-colors duration-300">
+
+    <div id="overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[45] hidden transition-opacity lg:hidden"></div>
+
+    <div class="flex h-screen overflow-hidden">
+
+        <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-sidebarBg flex flex-col border-r border-gray-200 dark:border-white/5 transform -translate-x-full lg:translate-x-0 lg:relative transition-transform duration-300 ease-in-out flex-shrink-0">
+            
+            <button onclick="toggleSidebar()" class="lg:hidden absolute top-4 right-4 text-gray-500 dark:text-textGray hover:text-accent p-2">
+                <i class="fa-solid fa-xmark text-2xl"></i>
+            </button>
+
+            <div class="p-6 flex items-center gap-3">
+                <div class="bg-accent p-2 rounded-lg text-black shadow-[0_0_15px_rgba(249,178,51,0.3)]">
+                    <i class="fas fa-bus text-lg"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-sm tracking-wide dark:text-white">SmartBus</h3>
+                    <p class="text-[10px] text-textGray uppercase font-medium">Student Portal</p>
+                </div>
+            </div>
+
+            <div class="px-4 py-2 text-[10px] text-textGray font-bold uppercase tracking-widest mt-4">Main</div>
+
+            <nav class="flex-1 px-3 space-y-1 mt-2 text-sm overflow-y-auto no-scrollbar">
+                <a href="userdashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-textGray hover:bg-gray-100 dark:hover:bg-white/5 transition">
+                    <i class="fa-solid fa-table-columns w-5 text-center"></i> Dashboard
+                </a>
+                <a href="bookTrip.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-textGray hover:bg-gray-100 dark:hover:bg-white/5 transition">
+                    <i class="fa-regular fa-calendar-check w-5 text-center"></i> Book Trip
+                </a>
+                <a href="myTrips.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-accent/10 border border-accent text-accent font-medium shadow-sm">
+                    <i class="fa-solid fa-route w-5 text-center"></i> My Trips
+                </a>
+                <a href="Route_Details.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-textGray hover:bg-gray-100 dark:hover:bg-white/5 transition">
+                    <i class="fa-solid fa-map-location-dot w-5 text-center"></i> Route Details
+                </a>
+                <a href="trackBus.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-textGray hover:bg-gray-100 dark:hover:bg-white/5 transition">
+                    <i class="fa-solid fa-location-crosshairs w-5 text-center"></i> Track Bus
+                </a>
+                <a href="attendance.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-textGray hover:bg-gray-100 dark:hover:bg-white/5 transition">
+                    <i class="fa-solid fa-chart-simple w-5 text-center"></i> Attendance
+                </a>
+            </nav>
+
+            <div class="p-4 border-t border-gray-200 dark:border-white/5 space-y-1">
+                <a href="settings.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-textGray hover:bg-gray-100 dark:hover:bg-white/5 transition">
+                    <i class="fa-solid fa-gear w-5 text-center"></i> Settings
+                </a>
+                <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm text-red-500 hover:text-red-400 transition">
+                    <i class="fa-solid fa-arrow-right-from-bracket w-5 text-center"></i> Logout
+                </a>
+            </div>
+        </aside>
+
+        <main class="flex-1 relative overflow-y-auto no-scrollbar flex flex-col">
+
+            <header class="sticky top-0 bg-white/80 dark:bg-darkBg/80 backdrop-blur-md z-40 border-b border-gray-200 dark:border-white/5 px-4 lg:px-8 py-4 lg:py-6 transition-colors duration-300">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                        <button onclick="toggleSidebar()" class="lg:hidden text-textGray hover:text-accent p-2 bg-gray-100 dark:bg-cardBg rounded-lg transition-colors">
+                            <i class="fa-solid fa-bars-staggered text-xl"></i>
+                        </button>
+                        <div>
+                            <h1 class="text-lg lg:text-xl font-bold tracking-tight dark:text-white">My Trips</h1>
+                            <p class="text-[10px] lg:text-[11px] text-textGray">View and manage your schedule</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3 lg:gap-4">
+                        <button onclick="toggleTheme()" class="w-10 h-10 rounded-full border border-gray-200 dark:border-white/10 flex items-center justify-center text-textGray hover:text-accent transition-all bg-gray-50 dark:bg-cardBg">
+                            <i id="theme-icon" class="fa-solid fa-moon"></i>
+                        </button>
+
+                        <div class="flex items-center gap-2 lg:gap-3 bg-gray-100 dark:bg-cardBg p-1 lg:pr-4 rounded-full border border-gray-200 dark:border-white/5">
+                            <div class="w-8 h-8 lg:w-9 lg:h-9 bg-accent/20 rounded-full flex items-center justify-center text-accent font-bold text-xs">S</div>
+                            <div class="hidden sm:block text-[10px] lg:text-[11px] leading-tight text-left">
+                                <p class="font-bold text-gray-900 dark:text-white">Sara Ahmed</p>
+                                <p class="text-textGray">STU-981</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="p-4 lg:p-8 pb-12 transition-all duration-300">
+                
+                <div class="bg-white/50 dark:bg-cardBg/50 p-1 rounded-2xl flex w-full max-w-sm mb-8 border border-gray-200 dark:border-white/5 backdrop-blur-sm shadow-sm">
+                    <button class="flex-1 py-2 text-[10px] font-bold bg-white dark:bg-cardBg border border-gray-200 dark:border-white/10 rounded-xl shadow-sm text-gray-900 dark:text-white uppercase tracking-wider">Upcoming</button>
+                    <button class="flex-1 py-2 text-[10px] text-textGray font-bold uppercase tracking-wider hover:text-accent transition-colors">History</button>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-6xl">
+                    
+                    <div class="bg-white dark:bg-cardBg border border-gray-200 dark:border-white/5 rounded-[24px] p-6 shadow-sm hover:shadow-xl hover:border-accent/30 transition-all group relative overflow-hidden">
+                        <div class="absolute -right-10 -top-10 w-32 h-32 bg-accent/5 rounded-full blur-3xl group-hover:bg-accent/10 transition-colors"></div>
+
+                        <div class="flex justify-between items-start mb-6 relative">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-gray-50 dark:bg-darkBg flex items-center justify-center border border-gray-100 dark:border-white/5">
+                                    <i class="fa-regular fa-calendar-check text-accent text-lg"></i>
+                                </div>
+                                <div>
+                                    <p class="text-[9px] uppercase font-black text-textGray tracking-widest">Date</p>
+                                    <p class="text-[13px] font-bold dark:text-white text-gray-900">Tomorrow, Sunday</p>
+                                </div>
+                            </div>
+                            <span class="text-[8px] font-black bg-success/10 text-success px-2.5 py-1.5 rounded-lg uppercase tracking-tighter border border-success/20">Confirmed</span>
+                        </div>
+
+                        <div class="flex items-center gap-4 mb-6 relative">
+                            <div class="flex flex-col items-center gap-1">
+                                <div class="w-2 h-2 rounded-full bg-accent"></div>
+                                <div class="w-0.5 h-6 bg-gray-200 dark:bg-white/10 rounded-full"></div>
+                                <div class="w-2 h-2 rounded-full border-2 border-accent"></div>
+                            </div>
+                            <div>
+                                <h3 class="text-[15px] font-bold dark:text-white flex items-center gap-2">
+                                    Main Campus <i class="fa-solid fa-arrow-right-long text-textGray text-[10px]"></i> Stadium
+                                </h3>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-2 mb-8 relative">
+                            <div class="bg-gray-50/50 dark:bg-darkBg/50 p-3 rounded-2xl border border-gray-100 dark:border-white/5">
+                                <p class="text-[8px] text-textGray uppercase font-bold mb-1">Station</p>
+                                <p class="text-[10px] font-bold dark:text-white truncate">Al-Rawda Sq.</p>
+                            </div>
+                            <div class="bg-gray-50/50 dark:bg-darkBg/50 p-3 rounded-2xl border border-gray-100 dark:border-white/5">
+                                <p class="text-[8px] text-textGray uppercase font-bold mb-1">Bus No</p>
+                                <p class="text-[10px] font-bold dark:text-white">BUS-012</p>
+                            </div>
+                            <div class="bg-gray-50/50 dark:bg-darkBg/50 p-3 rounded-2xl border border-gray-100 dark:border-white/5 text-center">
+                                <p class="text-[8px] text-textGray uppercase font-bold mb-1">Pickup</p>
+                                <p class="text-[10px] font-bold text-accent">07:45 AM</p>
+                            </div>
+                        </div>
+
+                        <button class="w-full bg-red-500/5 hover:bg-danger text-danger hover:text-white py-3.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2 border border-danger/10">
+                            <i class="fa-solid fa-calendar-xmark"></i> Cancel Booking
+                        </button>
+                    </div>
+
+                    <div class="bg-white dark:bg-cardBg border border-gray-200 dark:border-white/5 rounded-[24px] p-6 shadow-sm hover:shadow-xl transition-all group relative">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-gray-50 dark:bg-darkBg flex items-center justify-center border border-gray-100 dark:border-white/5"><i class="fa-regular fa-calendar text-accent"></i></div>
+                                <div><p class="text-[9px] uppercase font-black text-textGray tracking-widest">Date</p><p class="text-[13px] font-bold dark:text-white text-gray-900">Mon, Feb 24</p></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="flex flex-col items-center gap-1"><div class="w-2 h-2 rounded-full bg-accent"></div><div class="w-0.5 h-6 bg-gray-200 dark:bg-white/10"></div><div class="w-2 h-2 rounded-full border-2 border-accent"></div></div>
+                            <h3 class="text-[15px] font-bold dark:text-white">Main Campus <i class="fa-solid fa-arrow-right-long text-textGray mx-1 text-[10px]"></i> Stadium</h3>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 mb-8">
+                             <div class="bg-gray-50/50 dark:bg-darkBg/50 p-3 rounded-2xl text-center"><p class="text-[8px] text-textGray uppercase font-bold">Bus</p><p class="text-[10px] font-bold dark:text-white">BUS-08</p></div>
+                             <div class="bg-gray-50/50 dark:bg-darkBg/50 p-3 rounded-2xl text-center"><p class="text-[8px] text-textGray uppercase font-bold">Time</p><p class="text-[10px] font-bold text-accent">03:30 PM</p></div>
+                             <div class="bg-gray-50/50 dark:bg-darkBg/50 p-3 rounded-2xl text-center"><p class="text-[8px] text-textGray uppercase font-bold">Trip ID</p><p class="text-[10px] font-bold dark:text-white">#9821</p></div>
+                        </div>
+                        <button class="w-full bg-red-500/5 hover:bg-danger text-danger hover:text-white py-3.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">Cancel Booking</button>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Sidebar Toggle for Mobile
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const isOpen = sidebar.classList.contains('translate-x-0');
+            
+            if (isOpen) {
+                sidebar.classList.replace('translate-x-0', '-translate-x-full');
+                overlay.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            } else {
+                sidebar.classList.replace('-translate-x-full', 'translate-x-0');
+                overlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // Theme Toggle
+        function toggleTheme() {
+            const html = document.getElementById('html-tag');
+            const icon = document.getElementById('theme-icon');
+            
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                icon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                icon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Apply saved theme on load
+        if (localStorage.getItem('theme') === 'light') {
+            document.getElementById('html-tag').classList.remove('dark');
+            document.getElementById('theme-icon')?.classList.replace('fa-moon', 'fa-sun');
+        }
+    </script>
+</body>
+</html>

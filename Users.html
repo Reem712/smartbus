@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartBus Admin - Users</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brandOrange: '#d97706',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* CSS Variables for Light/Dark Mode Scrollbar */
+        :root {
+            --scroll-track: #f1f5f9;
+            --scroll-thumb: #cbd5e1;
+        }
+        .dark {
+            --scroll-track: #0f1115;
+            --scroll-thumb: #262b33;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--scroll-track); }
+        ::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .dark ::-webkit-scrollbar-thumb:hover { background: #3d4450; }
+        
+        /* Hide scrollbar for tabs on mobile  */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-[#0f1115] text-gray-800 dark:text-gray-200 font-sans h-screen flex overflow-hidden transition-colors duration-300 relative">
+
+    <!-- Hidden Checkbox for Mobile Menu Toggle  -->
+    <input type="checkbox" id="mobile-menu" class="hidden peer" />
+
+    <!-- Mobile Sidebar Overlay -->
+    <label for="mobile-menu" class="fixed inset-0 bg-black/60 z-40 hidden peer-checked:block md:!hidden backdrop-blur-sm cursor-pointer"></label>
+
+    <!-- Sidebar -->
+    <aside class="w-64 fixed md:relative inset-y-0 left-0 transform -translate-x-full peer-checked:translate-x-0 md:translate-x-0 border-r border-gray-200 dark:border-[#262b33] flex flex-col justify-between bg-white dark:bg-[#111318] z-50 transition-transform duration-300 ease-in-out">
+        
+        <!-- Mobile Close Sidebar Button -->
+        <label for="mobile-menu" class="md:hidden absolute top-6 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-[#1f232b] text-gray-500 hover:text-red-500 transition-colors cursor-pointer">
+            <i class="fa-solid fa-xmark"></i>
+        </label>
+
+        <div>
+            <!-- Logo -->
+            <div class="h-20 flex items-center px-6 gap-3 border-b border-gray-200 dark:border-[#262b33]">
+                <div class="w-8 h-8 rounded bg-brandOrange flex items-center justify-center text-white font-bold shrink-0">
+                    <i class="fa-solid fa-bus text-sm"></i>
+                </div>
+                <div>
+                    <h1 class="text-gray-900 dark:text-white font-bold text-lg leading-tight">SmartBus</h1>
+                    <p class="text-xs text-gray-500 dark:text-[#8b949e]">Admin Panel</p>
+                </div>
+            </div>
+
+            <!-- Main Menu -->
+            <div class="px-4 py-6 overflow-y-auto max-h-[calc(100vh-160px)]">
+                <p class="text-[10px] font-bold text-gray-400 dark:text-[#8b949e] uppercase tracking-wider mb-4 px-2">Main</p>
+                <nav class="space-y-1">
+                    <a href="Dashboard.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#15181e] transition-colors border-l-2 border-transparent">
+                        <i class="fa-solid fa-border-all w-5 text-center shrink-0"></i>
+                        <span class="text-sm">Dashboard</span>
+                    </a>
+                    <!-- Active Menu Item (Users) -->
+                    <a href="Users.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-orange-50 dark:bg-[rgba(217,119,6,0.1)] text-brandOrange font-medium border-l-2 border-brandOrange transition-colors">
+                        <i class="fa-solid fa-user-group w-5 text-center shrink-0"></i>
+                        <span class="text-sm">Users</span>
+                    </a>
+                    <a href="ManageRoutes.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#15181e] transition-colors border-l-2 border-transparent">
+                        <i class="fa-solid fa-location-dot w-5 text-center shrink-0"></i>
+                        <span class="text-sm">Routes</span>
+                    </a>
+                    <a href="myTrips.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#15181e] transition-colors border-l-2 border-transparent">
+                        <i class="fa-solid fa-bus-simple w-5 text-center shrink-0"></i>
+                        <span class="text-sm">Trips</span>
+                    </a>
+                    <a href="notification.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#15181e] transition-colors border-l-2 border-transparent">
+                        <i class="fa-regular fa-bell w-5 text-center shrink-0"></i>
+                        <span class="text-sm">Notifications</span>
+                    </a>
+                    <a href="Report.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#15181e] transition-colors border-l-2 border-transparent">
+                        <i class="fa-solid fa-chart-column w-5 text-center shrink-0"></i>
+                        <span class="text-sm">Reports</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Bottom Menu -->
+        <div class="px-4 py-6 border-t border-gray-200 dark:border-[#262b33]">
+            <nav class="space-y-1">
+                <a href="settings.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#15181e] transition-colors">
+                    <i class="fa-solid fa-gear w-5 text-center shrink-0"></i>
+                    <span class="text-sm">Settings</span>
+                </a>
+                <a href="sign-in.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors">
+                    <i class="fa-solid fa-arrow-right-from-bracket w-5 text-center shrink-0"></i>
+                    <span class="text-sm">Logout</span>
+                </a>
+            </nav>
+        </div>
+        
+        <!-- Desktop Collapse Button -->
+        <button class="hidden md:flex absolute top-6 -right-3 w-6 h-6 bg-white dark:bg-[#15181e] border border-gray-200 dark:border-[#262b33] rounded-full items-center justify-center text-gray-400 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white shadow-sm transition-colors duration-300">
+            <i class="fa-solid fa-chevron-left text-[10px]"></i>
+        </button>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col overflow-y-auto relative z-10 w-full">
+        
+        <!-- Header -->
+        <header class="h-20 flex items-center justify-between px-4 sm:px-8 sticky top-0 bg-white/90 dark:bg-[#0f1115]/90 backdrop-blur z-30 border-b border-gray-200 dark:border-[#262b33] transition-colors duration-300">
+            <div class="flex items-center gap-4">
+                <!-- Mobile Menu Button -->
+                <label for="mobile-menu" class="md:hidden text-gray-500 dark:text-[#8b949e] hover:text-brandOrange text-xl cursor-pointer">
+                    <i class="fa-solid fa-bars"></i>
+                </label>
+                <div>
+                    <h2 class="text-gray-900 dark:text-white font-bold text-lg sm:text-xl">Users</h2>
+                    <p class="hidden sm:block text-sm text-gray-500 dark:text-[#8b949e]">Manage students and drivers</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-4 sm:gap-6">
+                <!-- Search (Hidden on mobile) -->
+                <div class="relative w-48 lg:w-64 hidden sm:block">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-[#8b949e] text-sm"></i>
+                    <input type="text" placeholder="Search..." class="w-full bg-gray-100 dark:bg-[#1f232b] text-sm text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-[#8b949e] rounded-lg pl-9 pr-4 py-2 outline-none focus:ring-1 focus:ring-brandOrange border border-transparent transition-all">
+                </div>
+                
+                <!-- Theme Toggle Button -->
+                <button id="themeToggle" class="text-gray-500 dark:text-[#8b949e] hover:text-brandOrange transition-colors" title="Toggle Light/Dark Mode">
+                    <i class="fa-regular fa-sun hidden dark:block text-lg"></i>
+                    <i class="fa-regular fa-moon block dark:hidden text-lg"></i>
+                </button>
+
+                <!-- Notification -->
+                <button class="relative text-gray-500 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white transition-colors">
+                    <i class="fa-regular fa-bell text-lg"></i>
+                    <span class="absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-red-500 text-[8px] font-bold text-white border-2 border-white dark:border-[#0f1115]">3</span>
+                </button>
+                
+                <!-- Profile -->
+                <div class="flex items-center gap-3 pl-2 sm:pl-4 border-l border-gray-200 dark:border-[#262b33] cursor-pointer">
+                    <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-yellow-600 flex items-center justify-center text-white font-semibold text-sm shadow-sm shrink-0">A</div>
+                    <div class="hidden md:block">
+                        <p class="text-sm font-medium text-gray-900 dark:text-white leading-tight">Admin</p>
+                        <p class="text-xs text-gray-500 dark:text-[#8b949e]">admin@smartbus.com</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Responsive Padding -->
+        <div class="p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6">
+            
+            <!-- Top Actions: Tabs & Buttons -->
+            <!-- Flex-col on mobile, flex-row on desktop -->
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                <!-- Tabs with horizontal scroll on small screens -->
+                <div class="flex items-center overflow-x-auto no-scrollbar bg-gray-100 dark:bg-[#15181e] p-1 rounded-lg border border-gray-200 dark:border-[#262b33] transition-colors duration-300 w-full lg:w-auto">
+                    <button class="whitespace-nowrap px-4 py-1.5 rounded-md bg-white dark:bg-[#1f232b] text-sm font-medium text-gray-900 dark:text-white shadow-sm dark:shadow-none transition-colors">
+                        All Users <span class="text-gray-500 dark:text-[#8b949e] ml-1 font-normal">(8)</span>
+                    </button>
+                    <button class="whitespace-nowrap px-4 py-1.5 rounded-md text-sm font-medium text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-white/50 dark:hover:bg-white/[0.05] transition-colors">
+                        Students <span class="text-gray-400 dark:text-[#6b7280] ml-1 font-normal">(4)</span>
+                    </button>
+                    <button class="whitespace-nowrap px-4 py-1.5 rounded-md text-sm font-medium text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-white/50 dark:hover:bg-white/[0.05] transition-colors">
+                        Drivers <span class="text-gray-400 dark:text-[#6b7280] ml-1 font-normal">(4)</span>
+                    </button>
+                </div>
+
+                <!-- Action Buttons: full width on mobile -->
+                <div class="flex items-center gap-3 w-full lg:w-auto">
+                    <button class="flex-1 lg:flex-none justify-center flex items-center gap-2 px-4 py-2 bg-brandOrange hover:bg-orange-600 text-white text-sm font-medium rounded-lg transition-colors shadow-sm">
+                        <i class="fa-solid fa-plus"></i> <a href="addUser.html"> Add User</a>
+                    </button>
+                    <button class="flex-1 lg:flex-none justify-center flex items-center gap-2 px-4 py-2 bg-white dark:bg-transparent border border-gray-200 dark:border-[#262b33] hover:bg-gray-50 dark:hover:bg-[#15181e] text-gray-700 dark:text-gray-300 text-sm font-medium rounded-lg transition-colors shadow-sm dark:shadow-none">
+                        <i class="fa-solid fa-download"></i> Export
+                    </button>
+                </div>
+            </div>
+
+            <!-- Search & Filters Row -->
+            <div class="flex flex-col sm:flex-row gap-3">
+                <div class="relative flex-1">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-[#8b949e]"></i>
+                    <input type="text" placeholder="Search by name or email..." class="w-full bg-white dark:bg-[#15181e] text-sm text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-[#8b949e] rounded-lg pl-11 pr-4 py-2.5 outline-none focus:ring-1 focus:ring-brandOrange border border-gray-200 dark:border-[#262b33] shadow-sm dark:shadow-none transition-all">
+                </div>
+                <button class="flex items-center justify-center sm:justify-start gap-2 px-5 py-2.5 bg-white dark:bg-[#15181e] border border-gray-200 dark:border-[#262b33] hover:bg-gray-50 dark:hover:bg-[#1f232b] text-gray-700 dark:text-gray-300 text-sm font-medium rounded-lg transition-colors shadow-sm dark:shadow-none w-full sm:w-auto">
+                    <i class="fa-solid fa-filter"></i> Filters
+                </button>
+            </div>
+
+            <!-- Main Table Container -->
+            <!-- Overflow-x-auto for horizontal scroll on mobile -->
+            <div class="bg-white dark:bg-[#15181e] border border-gray-200 dark:border-[#262b33] rounded-xl overflow-hidden shadow-sm dark:shadow-none transition-colors duration-300">
+                <div class="overflow-x-auto custom-scrollbar">
+                    <table class="w-full text-left border-collapse min-w-[800px]">
+                        <thead>
+                            <tr class="border-b border-gray-200 dark:border-[#262b33] bg-gray-50/50 dark:bg-transparent text-[11px] font-semibold text-gray-500 dark:text-[#8b949e] uppercase tracking-wider">
+                                <th class="py-4 px-6">User</th>
+                                <th class="py-4 px-6">Contact</th>
+                                <th class="py-4 px-6">Role</th>
+                                <th class="py-4 px-6">Status</th>
+                                <th class="py-4 px-6">Joined</th>
+                                <th class="py-4 px-6">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm">
+                            
+                            <!-- User Row 1 -->
+                            <tr class="border-b border-gray-100 dark:border-[#262b33]/50 hover:bg-gray-50 dark:hover:bg-white/[0.02] transition-colors group">
+                                <td class="py-4 px-6">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-9 h-9 rounded-full bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-500 flex items-center justify-center font-bold text-sm shrink-0">S</div>
+                                        <div>
+                                            <p class="font-semibold text-gray-900 dark:text-white">Sara Ahmed</p>
+                                            <p class="text-xs text-gray-500 dark:text-[#8b949e]">U-001</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6 text-gray-600 dark:text-gray-400 text-xs space-y-1">
+                                    <div class="flex items-center gap-2"><i class="fa-regular fa-envelope text-gray-400 dark:text-[#6b7280]"></i> sara@uni.edu</div>
+                                    <div class="flex items-center gap-2"><i class="fa-solid fa-phone text-gray-400 dark:text-[#6b7280]"></i> +962 79 123 4567</div>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-emerald-50 dark:bg-[#11231b] text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20 whitespace-nowrap">
+                                        Student
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="flex items-center gap-2 text-gray-900 dark:text-white font-medium whitespace-nowrap">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6 text-gray-600 dark:text-[#8b949e] whitespace-nowrap">Jan 15, 2026</td>
+                                <td class="py-4 px-6 text-gray-400 hover:text-gray-900 dark:hover:text-white cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <i class="fa-solid fa-ellipsis-vertical px-2"></i>
+                                </td>
+                            </tr>
+
+                            <!-- User Row 2 -->
+                            <tr class="border-b border-gray-100 dark:border-[#262b33]/50 hover:bg-gray-50 dark:hover:bg-white/[0.02] transition-colors group">
+                                <td class="py-4 px-6">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-9 h-9 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-500 flex items-center justify-center font-bold text-sm shrink-0">A</div>
+                                        <div>
+                                            <p class="font-semibold text-gray-900 dark:text-white">Ahmad Hassan</p>
+                                            <p class="text-xs text-gray-500 dark:text-[#8b949e]">U-002</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6 text-gray-600 dark:text-gray-400 text-xs space-y-1">
+                                    <div class="flex items-center gap-2"><i class="fa-regular fa-envelope text-gray-400 dark:text-[#6b7280]"></i> ahmad.h@smartbus.com</div>
+                                    <div class="flex items-center gap-2"><i class="fa-solid fa-phone text-gray-400 dark:text-[#6b7280]"></i> +962 79 234 5678</div>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-orange-50 dark:bg-[#2a1e12] text-brandOrange border border-orange-200 dark:border-brandOrange/20 whitespace-nowrap">
+                                        Driver
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="flex items-center gap-2 text-gray-900 dark:text-white font-medium whitespace-nowrap">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6 text-gray-600 dark:text-[#8b949e] whitespace-nowrap">Dec 3, 2025</td>
+                                <td class="py-4 px-6 text-gray-400 hover:text-gray-900 dark:hover:text-white cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <i class="fa-solid fa-ellipsis-vertical px-2"></i>
+                                </td>
+                            </tr>
+
+                            <!-- User Row 3 -->
+                            <tr class="border-b border-gray-100 dark:border-[#262b33]/50 hover:bg-gray-50 dark:hover:bg-white/[0.02] transition-colors group">
+                                <td class="py-4 px-6">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-9 h-9 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-500 flex items-center justify-center font-bold text-sm shrink-0">L</div>
+                                        <div>
+                                            <p class="font-semibold text-gray-900 dark:text-white">Lina Khalil</p>
+                                            <p class="text-xs text-gray-500 dark:text-[#8b949e]">U-003</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6 text-gray-600 dark:text-gray-400 text-xs space-y-1">
+                                    <div class="flex items-center gap-2"><i class="fa-regular fa-envelope text-gray-400 dark:text-[#6b7280]"></i> lina.k@uni.edu</div>
+                                    <div class="flex items-center gap-2"><i class="fa-solid fa-phone text-gray-400 dark:text-[#6b7280]"></i> +962 79 345 6789</div>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-emerald-50 dark:bg-[#11231b] text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20 whitespace-nowrap">
+                                        Student
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="flex items-center gap-2 text-gray-900 dark:text-white font-medium whitespace-nowrap">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6 text-gray-600 dark:text-[#8b949e] whitespace-nowrap">Jan 20, 2026</td>
+                                <td class="py-4 px-6 text-gray-400 hover:text-gray-900 dark:hover:text-white cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <i class="fa-solid fa-ellipsis-vertical px-2"></i>
+                                </td>
+                            </tr>
+
+                            <!-- User Row 4 -->
+                            <tr class="border-b border-gray-100 dark:border-[#262b33]/50 hover:bg-gray-50 dark:hover:bg-white/[0.02] transition-colors group">
+                                <td class="py-4 px-6">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-9 h-9 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-500 flex items-center justify-center font-bold text-sm shrink-0">O</div>
+                                        <div>
+                                            <p class="font-semibold text-gray-900 dark:text-white">Omar Khalil</p>
+                                            <p class="text-xs text-gray-500 dark:text-[#8b949e]">U-004</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6 text-gray-600 dark:text-gray-400 text-xs space-y-1">
+                                    <div class="flex items-center gap-2"><i class="fa-regular fa-envelope text-gray-400 dark:text-[#6b7280]"></i> omar.k@smartbus.com</div>
+                                    <div class="flex items-center gap-2"><i class="fa-solid fa-phone text-gray-400 dark:text-[#6b7280]"></i> +962 79 456 7890</div>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-orange-50 dark:bg-[#2a1e12] text-brandOrange border border-orange-200 dark:border-brandOrange/20 whitespace-nowrap">
+                                        Driver
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="flex items-center gap-2 text-gray-900 dark:text-white font-medium whitespace-nowrap">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6 text-gray-600 dark:text-[#8b949e] whitespace-nowrap">Nov 12, 2025</td>
+                                <td class="py-4 px-6 text-gray-400 hover:text-gray-900 dark:hover:text-white cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <i class="fa-solid fa-ellipsis-vertical px-2"></i>
+                                </td>
+                            </tr>
+
+                            <!-- User Row 5 -->
+                            <tr class="border-b border-gray-100 dark:border-[#262b33]/50 hover:bg-gray-50 dark:hover:bg-white/[0.02] transition-colors group">
+                                <td class="py-4 px-6">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-9 h-9 rounded-full bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-500 flex items-center justify-center font-bold text-sm shrink-0">N</div>
+                                        <div>
+                                            <p class="font-semibold text-gray-900 dark:text-white">Noor Mansour</p>
+                                            <p class="text-xs text-gray-500 dark:text-[#8b949e]">U-005</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6 text-gray-600 dark:text-gray-400 text-xs space-y-1">
+                                    <div class="flex items-center gap-2"><i class="fa-regular fa-envelope text-gray-400 dark:text-[#6b7280]"></i> noor.m@uni.edu</div>
+                                    <div class="flex items-center gap-2"><i class="fa-solid fa-phone text-gray-400 dark:text-[#6b7280]"></i> +962 79 567 8901</div>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-emerald-50 dark:bg-[#11231b] text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20 whitespace-nowrap">
+                                        Student
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="flex items-center gap-2 text-gray-900 dark:text-white font-medium whitespace-nowrap">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-gray-600"></span> Inactive
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6 text-gray-600 dark:text-[#8b949e] whitespace-nowrap">Feb 1, 2026</td>
+                                <td class="py-4 px-6 text-gray-400 hover:text-gray-900 dark:hover:text-white cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <i class="fa-solid fa-ellipsis-vertical px-2"></i>
+                                </td>
+                            </tr>
+
+                            <!-- User Row 6 -->
+                            <tr class="border-b border-gray-100 dark:border-[#262b33]/50 hover:bg-gray-50 dark:hover:bg-white/[0.02] transition-colors group">
+                                <td class="py-4 px-6">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-9 h-9 rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-500 flex items-center justify-center font-bold text-sm shrink-0">Y</div>
+                                        <div>
+                                            <p class="font-semibold text-gray-900 dark:text-white">Yusuf Nasser</p>
+                                            <p class="text-xs text-gray-500 dark:text-[#8b949e]">U-006</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6 text-gray-600 dark:text-gray-400 text-xs space-y-1">
+                                    <div class="flex items-center gap-2"><i class="fa-regular fa-envelope text-gray-400 dark:text-[#6b7280]"></i> yusuf.n@smartbus.com</div>
+                                    <div class="flex items-center gap-2"><i class="fa-solid fa-phone text-gray-400 dark:text-[#6b7280]"></i> +962 79 678 9012</div>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-orange-50 dark:bg-[#2a1e12] text-brandOrange border border-orange-200 dark:border-brandOrange/20 whitespace-nowrap">
+                                        Driver
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="flex items-center gap-2 text-gray-900 dark:text-white font-medium whitespace-nowrap">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6 text-gray-600 dark:text-[#8b949e] whitespace-nowrap">Oct 8, 2025</td>
+                                <td class="py-4 px-6 text-gray-400 hover:text-gray-900 dark:hover:text-white cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <i class="fa-solid fa-ellipsis-vertical px-2"></i>
+                                </td>
+                            </tr>
+
+                            <!-- User Row 7 -->
+                            <tr class="border-b border-gray-100 dark:border-[#262b33]/50 hover:bg-gray-50 dark:hover:bg-white/[0.02] transition-colors group">
+                                <td class="py-4 px-6">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-9 h-9 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-500 flex items-center justify-center font-bold text-sm shrink-0">H</div>
+                                        <div>
+                                            <p class="font-semibold text-gray-900 dark:text-white">Hana Tariq</p>
+                                            <p class="text-xs text-gray-500 dark:text-[#8b949e]">U-007</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6 text-gray-600 dark:text-gray-400 text-xs space-y-1">
+                                    <div class="flex items-center gap-2"><i class="fa-regular fa-envelope text-gray-400 dark:text-[#6b7280]"></i> hana.t@uni.edu</div>
+                                    <div class="flex items-center gap-2"><i class="fa-solid fa-phone text-gray-400 dark:text-[#6b7280]"></i> +962 79 789 0123</div>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-emerald-50 dark:bg-[#11231b] text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20 whitespace-nowrap">
+                                        Student
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="flex items-center gap-2 text-gray-900 dark:text-white font-medium whitespace-nowrap">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Active
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6 text-gray-600 dark:text-[#8b949e] whitespace-nowrap">Jan 28, 2026</td>
+                                <td class="py-4 px-6 text-gray-400 hover:text-gray-900 dark:hover:text-white cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <i class="fa-solid fa-ellipsis-vertical px-2"></i>
+                                </td>
+                            </tr>
+
+                            <!-- User Row 8 -->
+                            <tr class="hover:bg-gray-50 dark:hover:bg-white/[0.02] transition-colors group">
+                                <td class="py-4 px-6">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-9 h-9 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-500 flex items-center justify-center font-bold text-sm shrink-0">M</div>
+                                        <div>
+                                            <p class="font-semibold text-gray-900 dark:text-white">Ali Mahmoud</p>
+                                            <p class="text-xs text-gray-500 dark:text-[#8b949e]">U-008</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-6 text-gray-600 dark:text-gray-400 text-xs space-y-1">
+                                    <div class="flex items-center gap-2"><i class="fa-regular fa-envelope text-gray-400 dark:text-[#6b7280]"></i> ali.m@smartbus.com</div>
+                                    <div class="flex items-center gap-2"><i class="fa-solid fa-phone text-gray-400 dark:text-[#6b7280]"></i> +962 79 890 1234</div>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-orange-50 dark:bg-[#2a1e12] text-brandOrange border border-orange-200 dark:border-brandOrange/20 whitespace-nowrap">
+                                        Driver
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6">
+                                    <span class="flex items-center gap-2 text-gray-900 dark:text-white font-medium whitespace-nowrap">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-gray-600"></span> Inactive
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6 text-gray-600 dark:text-[#8b949e] whitespace-nowrap">Sep 15, 2025</td>
+                                <td class="py-4 px-6 text-gray-400 hover:text-gray-900 dark:hover:text-white cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <i class="fa-solid fa-ellipsis-vertical px-2"></i>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination Footer -->
+                <div class="px-4 sm:px-6 py-4 border-t border-gray-200 dark:border-[#262b33] bg-gray-50/50 dark:bg-transparent flex flex-col sm:flex-row items-center justify-between gap-4 transition-colors">
+                    <p class="text-xs text-gray-500 dark:text-[#8b949e] text-center sm:text-left w-full sm:w-auto">Showing 8 of 8 users</p>
+                    <div class="flex items-center gap-1">
+                        <button class="px-3 py-1.5 text-xs font-medium text-gray-500 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white transition-colors">Previous</button>
+                        <button class="w-8 h-8 rounded-lg bg-gray-200 dark:bg-[#262b33] text-gray-900 dark:text-white text-xs font-medium transition-colors">1</button>
+                        <button class="w-8 h-8 rounded-lg text-gray-600 dark:text-[#8b949e] hover:bg-gray-100 dark:hover:bg-[#1f232b] text-xs font-medium transition-colors">2</button>
+                        <button class="px-3 py-1.5 text-xs font-medium text-gray-900 dark:text-white hover:text-brandOrange transition-colors">Next</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Script  for Dark/Light mode toggle -->
+    <script>
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        themeToggleBtn.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+        });
+    </script>
+</body>
+</html>

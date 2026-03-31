@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartBus Admin - Notifications</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        accent: '#f59e0b',
+                        'bg-dark-app': '#0a0a0c',
+                        'bg-dark-side': '#111216',
+                        'bg-dark-card': '#16171d',
+                        'bg-dark-pill': '#1c1e26',
+                        'border-dark': '#1f2128'
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #1f2128; border-radius: 10px; }
+        .dark input, .dark textarea, .dark select { background-color: #1c1e26; border-color: #1f2128; color: white; }
+        input, textarea, select { background-color: #f1f5f9; border-color: #e2e8f0; color: #0f172a; }
+    </style>
+</head>
+<body class="bg-[#f8fafc] dark:bg-bg-dark-app text-[#0f172a] dark:text-white antialiased text-[14px] transition-colors duration-300">
+    
+    <div class="flex h-screen overflow-hidden">
+        
+        <aside class="hidden md:flex w-[210px] shrink-0 bg-white dark:bg-bg-dark-side border-r border-[#e2e8f0] dark:border-border-dark flex-col justify-between">
+            <div>
+                <div class="flex items-center gap-2.5 px-4 py-5 mb-4">
+                    <div class="bg-accent text-black p-1.5 rounded-md text-base leading-none">
+                        <i class="ph-fill ph-bus"></i>
+                    </div>
+                    <div>
+                        <span class="font-bold text-[0.85rem] block dark:text-white">SmartBus</span>
+                        <span class="text-[0.65rem] text-slate-500 dark:text-slate-400 block -mt-0.5">Admin Panel</span>
+                    </div>
+                </div>
+
+                <nav>
+                    <div class="text-[0.6rem] font-bold text-slate-400 dark:text-[#4a4d5a] px-4 mb-2 tracking-wider uppercase">Main</div>
+                    <ul class="space-y-0.5">
+                        <li><a href="#" class="flex items-center gap-2.5 px-4 py-2 text-[0.8rem] text-slate-500 hover:text-accent transition-colors"><i class="ph ph-squares-four text-lg"></i> Dashboard</a></li>
+                        <li><a href="#" class="flex items-center gap-2.5 px-4 py-2 text-[0.8rem] text-slate-500 hover:text-accent transition-colors"><i class="ph ph-users text-lg"></i> Users</a></li>
+                        <li><a href="#" class="flex items-center gap-2.5 px-4 py-2 text-[0.8rem] text-slate-500 hover:text-accent transition-colors"><i class="ph ph-map-trifold text-lg"></i> Routes</a></li>
+                        <li><a href="#" class="flex items-center gap-2.5 px-4 py-2 text-[0.8rem] text-slate-500 hover:text-accent transition-colors"><i class="ph ph-navigation-arrow text-lg"></i> Trips</a></li>
+                        <li class="px-2">
+                            <a href="#" class="flex items-center gap-2.5 px-4 py-2 text-[0.8rem] text-accent bg-accent/5 border-r-2 border-accent">
+                                <i class="ph ph-bell text-lg"></i> Notifications
+                            </a>
+                        </li>
+                        <li><a href="#" class="flex items-center gap-2.5 px-4 py-2 text-[0.8rem] text-slate-500 hover:text-accent transition-colors"><i class="ph ph-chart-bar text-lg"></i> Reports</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="p-4 border-t border-[#e2e8f0] dark:border-border-dark">
+                <a href="#" class="flex items-center gap-2.5 py-1.5 text-[0.8rem] text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
+                    <i class="ph ph-gear text-lg"></i> Settings
+                </a>
+                <a href="#" class="flex items-center gap-2.5 py-1.5 text-[0.8rem] text-red-400 hover:text-red-500 transition-colors mt-0.5">
+                    <i class="ph ph-sign-out text-lg"></i> Logout
+                </a>
+            </div>
+        </aside>
+
+        <main class="flex-1 flex flex-col overflow-hidden">
+             <header class="h-16 flex items-center justify-between px-4 md:px-8 border-b border-[#e2e8f0] dark:border-border-dark bg-white dark:bg-transparent">
+                <div>
+                    <h1 class="text-lg font-semibold leading-none">Notifications</h1>
+                    <p class="text-[0.75rem] text-slate-500 mt-1">Send reminders and manage alerts</p>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <div class="hidden sm:flex items-center gap-2 bg-slate-50 dark:bg-bg-dark-card border border-[#e2e8f0] dark:border-border-dark px-3 py-1.5 rounded-md">
+                        <i class="ph ph-magnifying-glass text-slate-400"></i>
+                        <input type="text" placeholder="Search..." class="bg-transparent border-none outline-none text-[0.75rem] w-32 dark:text-white">
+                    </div>
+                    <div class="relative">
+                        <i class="ph ph-bell text-xl text-slate-400 cursor-pointer"></i>
+                        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full border-2 border-bg-dark-app">3</span>
+                    </div>
+                    <button onclick="toggleTheme()" class="text-slate-500 text-lg hover:text-accent p-1">
+                        <i id="theme-icon" class="ph ph-moon-stars"></i>
+                    </button>
+                    <div class="flex items-center gap-2.5 bg-white dark:bg-bg-dark-pill border border-[#e2e8f0] dark:border-border-dark p-1 pr-3 rounded-lg cursor-pointer">
+                        <div class="w-7 h-7 bg-slate-700 dark:bg-slate-800 text-white flex items-center justify-center rounded-md text-[0.7rem] font-bold">A</div>
+                        <div class="hidden lg:block leading-tight">
+                            <span class="text-[0.75rem] font-semibold block text-[#0f172a] dark:text-white">Admin</span>
+                            <span class="text-[0.65rem] text-slate-500 dark:text-slate-400 block">admin@smartbus.com</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="flex-1 overflow-y-auto p-4 md:p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-8 max-w-[1400px]">
+                    
+                    <div class="space-y-6">
+                        <section class="bg-white dark:bg-bg-dark-card border border-[#e2e8f0] dark:border-border-dark p-6 rounded-2xl shadow-sm">
+                            <h3 class="text-[0.85rem] font-semibold mb-5">Send Notification</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="text-[0.65rem] text-slate-400 uppercase font-bold tracking-wider block mb-1.5">Title</label>
+                                    <input type="text" placeholder="Notification title..." class="w-full rounded-lg px-3 py-2 outline-none focus:ring-1 focus:ring-accent/50 transition-all border">
+                                </div>
+                                <div>
+                                    <label class="text-[0.65rem] text-slate-400 uppercase font-bold tracking-wider block mb-1.5">Message</label>
+                                    <textarea placeholder="Write your message..." rows="4" class="w-full rounded-lg px-3 py-2 outline-none focus:ring-1 focus:ring-accent/50 transition-all resize-none border"></textarea>
+                                </div>
+                                <div>
+                                    <label class="text-[0.65rem] text-slate-400 uppercase font-bold tracking-wider block mb-1.5">Audience</label>
+                                    <select class="w-full rounded-lg px-3 py-2 outline-none border appearance-none cursor-pointer">
+                                        <option>All Users</option>
+                                        <option>Drivers Only</option>
+                                        <option>Students Only</option>
+                                    </select>
+                                </div>
+                                <div class="flex gap-2 pt-2">
+                                    <button class="flex-1 bg-accent hover:brightness-110 text-black py-2.5 rounded-lg font-bold text-[0.8rem] flex items-center justify-center gap-2 transition-all active:scale-95">
+                                        <i class="ph ph-paper-plane-tilt-fill"></i> Send Now
+                                    </button>
+                                    <button class="px-4 bg-slate-100 dark:bg-bg-dark-pill text-[#0f172a] dark:text-white py-2.5 rounded-lg font-bold text-[0.8rem] hover:brightness-95 transition-all">Cancel</button>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="bg-white dark:bg-bg-dark-card border border-[#e2e8f0] dark:border-border-dark p-6 rounded-2xl shadow-sm">
+                            <h3 class="text-[0.85rem] font-semibold mb-4">Quick Templates</h3>
+                            <div class="space-y-1">
+                                <button class="w-full flex items-center gap-3 py-2.5 text-[0.8rem] text-slate-500 hover:text-accent transition-all text-left">
+                                    <i class="ph ph-clock text-lg"></i> Registration Reminder
+                                </button>
+                                <button class="w-full flex items-center gap-3 py-2.5 text-[0.8rem] text-slate-500 hover:text-accent transition-all text-left">
+                                    <i class="ph ph-bus text-lg"></i> Trip Delay
+                                </button>
+                                <button class="w-full flex items-center gap-3 py-2.5 text-[0.8rem] text-slate-500 hover:text-accent transition-all text-left">
+                                    <i class="ph ph-map-trifold text-lg"></i> Route Change
+                                </button>
+                                <button class="w-full flex items-center gap-3 py-2.5 text-[0.8rem] text-slate-500 hover:text-accent transition-all text-left">
+                                    <i class="ph ph-megaphone text-lg"></i> General Announcement
+                                </button>
+                            </div>
+                        </section>
+                    </div>
+
+                    <section class="space-y-4">
+                        <h3 class="text-[0.85rem] font-semibold mb-1">Sent Notifications</h3>
+
+                        <div class="bg-white dark:bg-bg-dark-card border border-[#e2e8f0] dark:border-border-dark p-5 rounded-xl group hover:border-accent/30 transition-all">
+                            <div class="flex items-start gap-4 mb-2">
+                                <div class="bg-accent/10 text-accent p-2 rounded-lg"><i class="ph ph-bell-simple text-lg"></i></div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-[0.85rem]">Registration Window Reminder</h4>
+                                    <span class="text-[0.65rem] text-slate-500">Feb 7, 2026 • 11:00 AM</span>
+                                </div>
+                                <div class="bg-slate-50 dark:bg-bg-dark-pill text-slate-500 text-[0.65rem] px-2.5 py-1 rounded-md border border-[#e2e8f0] dark:border-border-dark flex items-center gap-1.5"><i class="ph ph-users"></i> All Students</div>
+                            </div>
+                            <p class="text-[0.8rem] text-slate-600 dark:text-slate-400 ml-[48px] mb-2">Don't forget to register for tomorrow's bus. Window closes at 2:00 PM.</p>
+                            <div class="text-[0.7rem] text-emerald-500 ml-[48px] flex items-center gap-1.5 font-medium"><i class="ph ph-check"></i> Read by 892 users</div>
+                        </div>
+
+                        <div class="bg-white dark:bg-bg-dark-card border border-[#e2e8f0] dark:border-border-dark p-5 rounded-xl group hover:border-accent/30 transition-all">
+                            <div class="flex items-start gap-4 mb-2">
+                                <div class="bg-accent/10 text-accent p-2 rounded-lg"><i class="ph ph-bell-simple text-lg"></i></div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-[0.85rem]">Route Change Notice</h4>
+                                    <span class="text-[0.65rem] text-slate-500">Feb 6, 2026 • 4:00 PM</span>
+                                </div>
+                                <div class="bg-slate-50 dark:bg-bg-dark-pill text-slate-500 text-[0.65rem] px-2.5 py-1 rounded-md border border-[#e2e8f0] dark:border-border-dark flex items-center gap-1.5"><i class="ph ph-users"></i> Aqaleem Route Students</div>
+                            </div>
+                            <p class="text-[0.8rem] text-slate-600 dark:text-slate-400 ml-[48px] mb-2">Aqaleem route will use an alternative road due to construction. Please arrive early.</p>
+                            <div class="text-[0.7rem] text-emerald-500 ml-[48px] flex items-center gap-1.5 font-medium"><i class="ph ph-check"></i> Read by 234 users</div>
+                        </div>
+
+                        <div class="bg-white dark:bg-bg-dark-card border border-[#e2e8f0] dark:border-border-dark p-5 rounded-xl group hover:border-accent/30 transition-all">
+                            <div class="flex items-start gap-4 mb-2">
+                                <div class="bg-accent/10 text-accent p-2 rounded-lg"><i class="ph ph-bell-simple text-lg"></i></div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-[0.85rem]">Return Trip Update</h4>
+                                    <span class="text-[0.65rem] text-slate-500">Feb 5, 2026 • 2:30 PM</span>
+                                </div>
+                                <div class="bg-slate-50 dark:bg-bg-dark-pill text-slate-500 text-[0.65rem] px-2.5 py-1 rounded-md border border-[#e2e8f0] dark:border-border-dark flex items-center gap-1.5"><i class="ph ph-users"></i> Evening Return</div>
+                            </div>
+                            <p class="text-[0.8rem] text-slate-600 dark:text-slate-400 ml-[48px] mb-2">Evening return trip has been moved from 7:00 PM to 7:15 PM for today only.</p>
+                            <div class="text-[0.7rem] text-emerald-500 ml-[48px] flex items-center gap-1.5 font-medium"><i class="ph ph-check"></i> Read by 156 users</div>
+                        </div>
+
+                        <div class="bg-white dark:bg-bg-dark-card border border-[#e2e8f0] dark:border-border-dark p-5 rounded-xl group hover:border-accent/30 transition-all">
+                            <div class="flex items-start gap-4 mb-2">
+                                <div class="bg-accent/10 text-accent p-2 rounded-lg"><i class="ph ph-bell-simple text-lg"></i></div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-[0.85rem]">New Driver Assigned</h4>
+                                    <span class="text-[0.65rem] text-slate-500">Feb 4, 2026 • 9:00 AM</span>
+                                </div>
+                                <div class="bg-slate-50 dark:bg-bg-dark-pill text-slate-500 text-[0.65rem] px-2.5 py-1 rounded-md border border-[#e2e8f0] dark:border-border-dark flex items-center gap-1.5"><i class="ph ph-users"></i> All Drivers</div>
+                            </div>
+                            <p class="text-[0.8rem] text-slate-600 dark:text-slate-400 ml-[48px] mb-2">A new driver, Khaled Saeed, has been assigned to the Seil route.</p>
+                            <div class="text-[0.7rem] text-emerald-500 ml-[48px] flex items-center gap-1.5 font-medium"><i class="ph ph-check"></i> Read by 6 users</div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                icon.classList.remove('ph-moon-stars');
+                icon.classList.add('ph-sun');
+            } else {
+                html.classList.add('dark');
+                icon.classList.remove('ph-sun');
+                icon.classList.add('ph-moon-stars');
+            }
+        }
+    </script>
+</body>
+</html>

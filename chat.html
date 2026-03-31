@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartBus Student - Route Chat</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brandOrange: '#d97706',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* CSS Variables for Light/Dark Mode Scrollbar */
+        :root {
+            --scroll-track: #f1f5f9;
+            --scroll-thumb: #cbd5e1;
+        }
+        .dark {
+            --scroll-track: #0f1115;
+            --scroll-thumb: #262b33;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--scroll-track); }
+        ::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .dark ::-webkit-scrollbar-thumb:hover { background: #3d4450; }
+        
+        /* Specific scrollbar for the chat area to look cleaner */
+        .chat-scrollbar::-webkit-scrollbar { width: 4px; }
+        .chat-scrollbar::-webkit-scrollbar-thumb { border-radius: 2px; }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-[#0f1115] text-gray-800 dark:text-gray-200 font-sans h-screen flex overflow-hidden transition-colors duration-300 relative">
+
+    <!-- Hidden Checkbox for Mobile Menu Toggle (CSS Only trick) -->
+    <input type="checkbox" id="mobile-menu" class="hidden peer" />
+
+    <!-- Mobile Sidebar Overlay -->
+    <label for="mobile-menu" class="fixed inset-0 bg-black/60 z-40 hidden peer-checked:block md:!hidden backdrop-blur-sm cursor-pointer"></label>
+
+    <!-- Sidebar -->
+    <aside class="w-64 fixed md:relative inset-y-0 left-0 transform -translate-x-full peer-checked:translate-x-0 md:translate-x-0 border-r border-gray-200 dark:border-[#262b33] flex flex-col justify-between bg-white dark:bg-[#111318] z-50 transition-transform duration-300 ease-in-out">
+        
+        <!-- Mobile Close Sidebar Button -->
+        <label for="mobile-menu" class="md:hidden absolute top-6 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-[#1f232b] text-gray-500 hover:text-red-500 transition-colors cursor-pointer">
+            <i class="fa-solid fa-xmark"></i>
+        </label>
+
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Logo -->
+            <div class="h-20 flex items-center px-6 gap-3 border-b border-gray-200 dark:border-[#262b33] shrink-0">
+                <div class="w-8 h-8 rounded bg-brandOrange flex items-center justify-center text-white font-bold shrink-0">
+                    <i class="fa-solid fa-bus text-sm"></i>
+                </div>
+                <div>
+                    <h1 class="text-gray-900 dark:text-white font-bold text-lg leading-tight">SmartBus</h1>
+                    <p class="text-[11px] text-gray-500 dark:text-[#8b949e]">Student Portal</p>
+                </div>
+            </div>
+
+            <!-- Main Menu -->
+            <div class="px-4 py-6 overflow-y-auto flex-1 custom-scrollbar">
+                <p class="text-[10px] font-bold text-gray-400 dark:text-[#8b949e] uppercase tracking-wider mb-4 px-2">Main</p>
+                <nav class="space-y-1">
+                    <a href="userdashboard.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#15181e] transition-colors border-l-2 border-transparent">
+                        <i class="fa-solid fa-border-all w-5 text-center shrink-0"></i>
+                        <span class="text-sm">Dashboard</span>
+                    </a>
+                    <a href="BookTrips.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#15181e] transition-colors border-l-2 border-transparent">
+                        <i class="fa-regular fa-calendar-check w-5 text-center shrink-0"></i>
+                        <span class="text-sm">Book Trip</span>
+                    </a>
+                    <a href="myTrips.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#15181e] transition-colors border-l-2 border-transparent">
+                        <i class="fa-solid fa-bus-simple w-5 text-center shrink-0"></i>
+                        <span class="text-sm">My Trips</span>
+                    </a>
+                    <a href="Route_Details.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#15181e] transition-colors border-l-2 border-transparent">
+                        <i class="fa-solid fa-location-dot w-5 text-center shrink-0"></i>
+                        <span class="text-sm">Route Details</span>
+                    </a>
+                    <a href="trackbus.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#15181e] transition-colors border-l-2 border-transparent">
+                        <i class="fa-solid fa-location-arrow w-5 text-center shrink-0"></i>
+                        <span class="text-sm">Track Bus</span>
+                    </a>
+                    <a href="Attendance.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#15181e] transition-colors border-l-2 border-transparent">
+                        <i class="fa-solid fa-chart-simple w-5 text-center shrink-0"></i>
+                        <span class="text-sm">Attendance</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#15181e] transition-colors border-l-2 border-transparent">
+                        <i class="fa-regular fa-bell w-5 text-center shrink-0"></i>
+                        <span class="text-sm">Notifications</span>
+                    </a>
+                    <!-- Active Menu Item (Route Chat) -->
+                    <a href="chat.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-orange-50 dark:bg-[rgba(217,119,6,0.1)] text-brandOrange font-medium border-l-2 border-brandOrange transition-colors">
+                        <i class="fa-regular fa-message w-5 text-center shrink-0"></i>
+                        <span class="text-sm">Route Chat</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Bottom Menu -->
+        <div class="px-4 py-6 border-t border-gray-200 dark:border-[#262b33] shrink-0">
+            <nav class="space-y-1">
+                <a href="Support.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#15181e] transition-colors border-l-2 border-transparent">
+                    <i class="fa-regular fa-circle-question w-5 text-center shrink-0"></i>
+                    <span class="text-sm">Support</span>
+                </a>
+                <a href="settings.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#15181e] transition-colors border-l-2 border-transparent">
+                    <i class="fa-solid fa-gear w-5 text-center shrink-0"></i>
+                    <span class="text-sm">Settings</span>
+                </a>
+                <a href="sign-in.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors mt-2 border-l-2 border-transparent">
+                    <i class="fa-solid fa-arrow-right-from-bracket w-5 text-center shrink-0"></i>
+                    <span class="text-sm">Logout</span>
+                </a>
+            </nav>
+        </div>
+        
+        <!-- Desktop Collapse Button -->
+        <button class="hidden md:flex absolute top-6 -right-3 w-6 h-6 bg-white dark:bg-[#15181e] border border-gray-200 dark:border-[#262b33] rounded-full items-center justify-center text-gray-400 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white shadow-sm transition-colors duration-300">
+            <i class="fa-solid fa-chevron-left text-[10px]"></i>
+        </button>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-screen overflow-hidden relative z-10 w-full">
+        
+        <!-- Header -->
+        <header class="h-20 flex items-center justify-between px-4 sm:px-8 sticky top-0 bg-white/90 dark:bg-[#0f1115]/90 backdrop-blur z-30 border-b border-gray-200 dark:border-[#262b33] transition-colors duration-300 shrink-0">
+            <div class="flex items-center gap-4">
+                <!-- Mobile Menu Button -->
+                <label for="mobile-menu" class="md:hidden text-gray-500 dark:text-[#8b949e] hover:text-brandOrange text-xl cursor-pointer">
+                    <i class="fa-solid fa-bars"></i>
+                </label>
+                <div>
+                    <h2 class="text-gray-900 dark:text-white font-bold text-lg sm:text-xl">Route Chat</h2>
+                    <p class="hidden sm:block text-sm text-gray-500 dark:text-[#8b949e]">Aqaleem → Stadium</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-4 sm:gap-6">
+                <!-- Theme Toggle Button -->
+                <button id="themeToggle" class="text-gray-500 dark:text-[#8b949e] hover:text-brandOrange transition-colors" title="Toggle Light/Dark Mode">
+                    <i class="fa-regular fa-sun hidden dark:block text-lg"></i>
+                    <i class="fa-regular fa-moon block dark:hidden text-lg"></i>
+                </button>
+
+                <!-- Notification -->
+                <button class="relative text-gray-500 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white transition-colors">
+                    <i class="fa-regular fa-bell text-lg"></i>
+                    <span class="absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-red-500 text-[8px] font-bold text-white border-2 border-white dark:border-[#0f1115]">2</span>
+                </button>
+                
+                <!-- Profile Student -->
+                <div class="flex items-center gap-3 pl-2 sm:pl-4 border-l border-gray-200 dark:border-[#262b33] cursor-pointer">
+                    <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gray-200 dark:bg-[#262b33] text-brandOrange flex items-center justify-center font-bold text-sm shadow-sm shrink-0">S</div>
+                    <div class="hidden md:block">
+                        <p class="text-sm font-medium text-gray-900 dark:text-white leading-tight">Sara Ahmed</p>
+                        <p class="text-xs text-gray-500 dark:text-[#8b949e]">STU-001</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Chat Container (Flex Column to push input to bottom) -->
+        <div class="flex-1 flex flex-col p-4 sm:p-6 lg:p-8 max-w-5xl mx-auto w-full overflow-hidden gap-4">
+            
+            <!-- Admin Announcement -->
+            <div class="bg-orange-50/50 dark:bg-[rgba(217,119,6,0.05)] border border-orange-200 dark:border-[#d97706]/30 rounded-xl p-4 sm:p-5 shrink-0 shadow-sm dark:shadow-none">
+                <h3 class="text-[10px] sm:text-xs font-bold text-brandOrange uppercase tracking-wider mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-bullhorn"></i> Admin Announcement
+                </h3>
+                <p class="text-sm text-gray-700 dark:text-gray-300">
+                    🚐 Reminder: Return trip at 7:00 PM has been added for Wednesday. Register before 2:00 PM!
+                </p>
+            </div>
+
+            <!-- Chat Status & Members -->
+            <div class="flex justify-between items-center shrink-0 px-1">
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span class="text-xs font-medium text-gray-600 dark:text-[#8b949e]">4 online</span>
+                </div>
+                <button class="flex items-center gap-2 text-xs font-medium text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white transition-colors">
+                    <i class="fa-solid fa-user-group"></i> Members
+                </button>
+            </div>
+
+            <!-- Main Chat Box (Scrollable) -->
+            <div class="bg-white dark:bg-[#15181e] border border-gray-200 dark:border-[#262b33] rounded-xl flex-1 overflow-y-auto p-4 sm:p-6 chat-scrollbar shadow-sm dark:shadow-none transition-colors duration-300">
+                
+                <div class="flex flex-col gap-6">
+                    
+                    <!-- Date Divider -->
+                    <div class="flex items-center text-center text-[11px] font-medium text-gray-400 dark:text-[#6b7280] before:flex-1 before:border-t before:border-gray-100 dark:before:border-[#262b33] before:mr-4 after:flex-1 after:border-t after:border-gray-100 dark:after:border-[#262b33] after:ml-4">
+                        Today
+                    </div>
+
+                    <!-- Received Message 1 (Omar K.) -->
+                    <div class="flex gap-3 max-w-[85%] sm:max-w-[75%]">
+                        <!-- Avatar -->
+                        <div class="w-8 h-8 rounded-full bg-gray-100 dark:bg-[#1f232b] text-gray-600 dark:text-[#8b949e] flex items-center justify-center font-bold text-[11px] shrink-0 mt-1">
+                            OK
+                        </div>
+                        <!-- Message Content -->
+                        <div class="flex flex-col gap-1">
+                            <span class="text-[11px] font-medium text-brandOrange ml-1">Omar K.</span>
+                            <!-- Bubble: Gray background, rounded corners except top-left -->
+                            <div class="bg-gray-100 dark:bg-[#1f232b] text-gray-800 dark:text-gray-200 text-sm p-3 rounded-2xl rounded-tl-sm border border-transparent dark:border-[#262b33]/50">
+                                Anyone know if the bus was late yesterday on the Aqaleem route?
+                            </div>
+                            <span class="text-[10px] text-gray-400 dark:text-[#6b7280] ml-1">8:12 AM</span>
+                        </div>
+                    </div>
+
+                    <!-- Received Message 2 (Noor S.) -->
+                    <div class="flex gap-3 max-w-[85%] sm:max-w-[75%]">
+                        <!-- Avatar -->
+                        <div class="w-8 h-8 rounded-full bg-gray-100 dark:bg-[#1f232b] text-gray-600 dark:text-[#8b949e] flex items-center justify-center font-bold text-[11px] shrink-0 mt-1">
+                            NS
+                        </div>
+                        <!-- Message Content -->
+                        <div class="flex flex-col gap-1">
+                            <span class="text-[11px] font-medium text-brandOrange ml-1">Noor S.</span>
+                            <div class="bg-gray-100 dark:bg-[#1f232b] text-gray-800 dark:text-gray-200 text-sm p-3 rounded-2xl rounded-tl-sm border border-transparent dark:border-[#262b33]/50">
+                                Yeah it was about 5 min late at Al-Rawda Square
+                            </div>
+                            <span class="text-[10px] text-gray-400 dark:text-[#6b7280] ml-1">8:14 AM</span>
+                        </div>
+                    </div>
+
+                    <!-- Sent Message (Me / Sara) -->
+                    <div class="flex gap-3 self-end max-w-[85%] sm:max-w-[75%] justify-end">
+                        <!-- Message Content -->
+                        <div class="flex flex-col gap-1 items-end">
+                            <!-- Bubble: Orange background, rounded corners except top-right -->
+                            <div class="bg-brandOrange text-white text-sm p-3 rounded-2xl rounded-tr-sm shadow-sm">
+                                Thanks for the heads up! I'll leave a bit earlier today.
+                            </div>
+                            <span class="text-[10px] text-gray-400 dark:text-[#6b7280] mr-1">8:15 AM</span>
+                        </div>
+                    </div>
+
+                    <!-- Received Message 3 (Lina M.) -->
+                    <div class="flex gap-3 max-w-[85%] sm:max-w-[75%]">
+                        <!-- Avatar -->
+                        <div class="w-8 h-8 rounded-full bg-gray-100 dark:bg-[#1f232b] text-gray-600 dark:text-[#8b949e] flex items-center justify-center font-bold text-[11px] shrink-0 mt-1">
+                            LM
+                        </div>
+                        <!-- Message Content -->
+                        <div class="flex flex-col gap-1">
+                            <span class="text-[11px] font-medium text-brandOrange ml-1">Lina M.</span>
+                            <div class="bg-gray-100 dark:bg-[#1f232b] text-gray-800 dark:text-gray-200 text-sm p-3 rounded-2xl rounded-tl-sm border border-transparent dark:border-[#262b33]/50">
+                                Registration just opened for tomorrow btw 🚌
+                            </div>
+                            <span class="text-[10px] text-gray-400 dark:text-[#6b7280] ml-1">8:20 AM</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Message Input Area -->
+            <div class="flex items-center gap-3 shrink-0 mt-2">
+                <!-- Input field (Pill shape) -->
+                <div class="flex-1 relative">
+                    <input type="text" placeholder="Type a message..." class="w-full bg-white dark:bg-[#15181e] text-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-[#6b7280] rounded-full pl-5 pr-12 py-3.5 outline-none focus:ring-1 focus:ring-brandOrange border border-gray-200 dark:border-[#262b33] shadow-sm dark:shadow-none transition-all">
+                    <!-- Optional: Attachment icon inside input -->
+                    <button class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors">
+                        <i class="fa-solid fa-paperclip"></i>
+                    </button>
+                </div>
+                <!-- Send Button -->
+                <button class="w-12 h-12 rounded-full bg-brandOrange hover:bg-orange-600 text-white flex items-center justify-center shrink-0 shadow-sm transition-colors cursor-pointer">
+                    <i class="fa-solid fa-paper-plane -ml-0.5 mt-0.5"></i>
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Script for Dark/Light mode toggle -->
+    <script>
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        themeToggleBtn.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+        });
+    </script>
+</body>
+</html>

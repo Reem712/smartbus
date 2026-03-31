@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartBus - Revolutionizing University Commutes</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        bgMain: '#0f1115',
+                        bgCard: '#15181e',
+                        brandOrange: '#d97706',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .dark ::-webkit-scrollbar-thumb { background: #3d4450; }
+        
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        
+        /* Grid Background Pattern */
+        .bg-grid-pattern {
+            background-image: linear-gradient(to right, rgba(128,128,128,0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(128,128,128,0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .dark .bg-grid-pattern {
+            background-image: linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-bgMain text-gray-800 dark:text-gray-200 font-sans min-h-screen overflow-x-hidden transition-colors duration-300 selection:bg-brandOrange selection:text-white">
+
+    <!-- Mobile Menu Checkbox -->
+    <input type="checkbox" id="mobile-nav" class="hidden peer" />
+
+    <!-- Navbar -->
+    <header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-bgMain/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center gap-3 z-50 relative">
+                <div class="w-10 h-10 rounded-xl bg-brandOrange flex items-center justify-center text-white font-bold shadow-lg shadow-brandOrange/20">
+                    <i class="fa-solid fa-bus text-lg"></i>
+                </div>
+                <span class="text-xl font-bold text-gray-900 dark:text-white tracking-tight">SmartBus</span>
+            </div>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="#features" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-brandOrange dark:hover:text-brandOrange transition-colors">Features</a>
+                <a href="#how-it-works" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-brandOrange dark:hover:text-brandOrange transition-colors">How it works</a>
+                <a href="#about" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-brandOrange dark:hover:text-brandOrange transition-colors">About Us</a>
+            </nav>
+
+            <!-- Actions (Theme Toggle & CTA) -->
+            <div class="flex items-center gap-4 z-50 relative">
+                <!-- Theme Toggle -->
+                <button id="themeToggle" class="w-10 h-10 rounded-full flex items-center justify-center text-gray-500 hover:text-brandOrange transition-colors">
+                    <i class="fa-regular fa-sun hidden dark:block text-lg"></i>
+                    <i class="fa-regular fa-moon block dark:hidden text-lg"></i>
+                </button>
+                
+                <!-- Get Started Button (Desktop) -->
+                <!-- هذا الزر هو الذي سينقلك لصفحة اختيار الدور اللي عملناها من شوية -->
+                <a href="landing.html" class="hidden md:flex items-center gap-2 bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-5 py-2.5 rounded-full text-sm font-semibold hover:scale-105 transition-transform duration-300 shadow-lg">
+                    Get Started <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+                <!-- Mobile Hamburger -->
+                <label for="mobile-nav" class="md:hidden w-10 h-10 flex items-center justify-center text-xl cursor-pointer text-gray-700 dark:text-gray-300">
+                    <i class="fa-solid fa-bars"></i>
+                </label>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div class="md:hidden absolute top-20 left-0 w-full bg-white dark:bg-bgCard border-b border-gray-200 dark:border-gray-800 shadow-xl transition-all duration-300 origin-top scale-y-0 peer-checked:scale-y-100 flex flex-col p-6 gap-4">
+            <a href="#features" class="text-base font-medium text-gray-800 dark:text-gray-200">Features</a>
+            <a href="#how-it-works" class="text-base font-medium text-gray-800 dark:text-gray-200">How it works</a>
+            <a href="#about" class="text-base font-medium text-gray-800 dark:text-gray-200">About Us</a>
+            <hr class="border-gray-100 dark:border-gray-800 my-2">
+            <a href="landing.html" class="flex items-center justify-center gap-2 bg-brandOrange text-white px-5 py-3 rounded-xl text-base font-semibold w-full">
+                Get Started
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 bg-grid-pattern z-0 opacity-40"></div>
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-brandOrange/20 rounded-full blur-[120px] z-0 animate-pulse-slow"></div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                
+                <!-- Left: Text Content -->
+                <div class="text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-orange-100 dark:bg-brandOrange/10 border border-orange-200 dark:border-brandOrange/20 text-brandOrange text-xs font-bold uppercase tracking-widest mb-6 animate-fade-in-up">
+                        <span class="w-2 h-2 rounded-full bg-brandOrange animate-pulse"></span> Smart Campus System
+                    </div>
+                    
+                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-gray-900 dark:text-white leading-[1.1] mb-6 tracking-tight animate-fade-in-up delay-100">
+                        Commute <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brandOrange to-yellow-500">Smarter,</span> Not Harder.
+                    </h1>
+                    
+                    <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto lg:mx-0 animate-fade-in-up delay-200 leading-relaxed">
+                        The ultimate university bus tracking and booking platform. Never miss a ride, track your bus in real-time, and manage your schedule effortlessly.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start animate-fade-in-up delay-300">
+                        <!-- هذا الزر هو الذي سينقلك لصفحة اختيار الدور -->
+                        <a href="landing.html" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-brandOrange hover:bg-orange-600 text-white font-semibold text-lg transition-all duration-300 shadow-lg shadow-brandOrange/25 hover:-translate-y-1 flex items-center justify-center gap-2">
+                            Join SmartBus <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <a href="#features" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-white dark:bg-bgCard border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white font-semibold text-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-all duration-300 text-center">
+                            Explore Features
+                        </a>
+                    </div>
+                    
+                    <!-- Small Stats -->
+                    <div class="mt-12 flex items-center justify-center lg:justify-start gap-8 animate-fade-in-up delay-300 text-gray-500 dark:text-gray-400 text-sm font-medium">
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-users text-brandOrange"></i> 5,000+ Students</div>
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-route text-brandOrange"></i> 12 Active Routes</div>
+                    </div>
+                </div>
+
+                <!-- Right: Abstract UI Art (Floating Elements) -->
+                <div class="relative hidden lg:block h-[500px] w-full animate-fade-in-up delay-200 perspective-1000">
+                    <!-- Main Map Card Mockup -->
+                    <div class="absolute right-0 top-1/2 -translate-y-1/2 w-80 h-96 bg-white dark:bg-bgCard rounded-3xl border border-gray-200 dark:border-gray-800 shadow-2xl overflow-hidden animate-float z-10 transform rotate-y-[-10deg] rotate-x-[5deg]">
+                        <div class="h-12 border-b border-gray-100 dark:border-gray-800 flex items-center px-4 gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <div class="p-4 h-full relative">
+                            <div class="w-full h-40 bg-gray-100 dark:bg-gray-800/50 rounded-xl mb-4 relative overflow-hidden">
+                                <!-- Fake Map Path -->
+                                <svg class="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                    <path d="M10,80 Q30,20 60,50 T90,10" fill="none" stroke="#d97706" stroke-width="2" stroke-dasharray="4" class="opacity-50"/>
+                                    <circle cx="60" cy="50" r="4" fill="#d97706" />
+                                    <circle cx="60" cy="50" r="10" fill="#d97706" class="opacity-30 animate-pulse" />
+                                </svg>
+                            </div>
+                            <div class="w-3/4 h-4 bg-gray-200 dark:bg-gray-700 rounded mb-3"></div>
+                            <div class="w-1/2 h-4 bg-gray-200 dark:bg-gray-700 rounded mb-6"></div>
+                            <div class="flex gap-2 mt-auto">
+                                <div class="w-10 h-10 rounded-full bg-brandOrange/20 text-brandOrange flex items-center justify-center"><i class="fa-solid fa-location-dot"></i></div>
+                                <div class="flex-1 h-10 rounded-xl bg-brandOrange opacity-20"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating Notification Card -->
+                    <div class="absolute -left-10 top-1/4 w-64 bg-white dark:bg-[#1f232b] p-4 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-xl animate-float-delayed z-20">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 text-green-500 flex items-center justify-center">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-gray-900 dark:text-white">Trip Confirmed</h4>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">Aqaleem to Stadium at 7:30 AM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating Bus Card -->
+                    <div class="absolute -bottom-4 right-10 w-56 bg-white dark:bg-[#1f232b] p-4 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-xl animate-float z-20 animation-delay-2000">
+                        <div class="flex items-center gap-3 mb-2">
+                            <div class="w-8 h-8 rounded-lg bg-orange-100 dark:bg-brandOrange/20 text-brandOrange flex items-center justify-center">
+                                <i class="fa-solid fa-bus"></i>
+                            </div>
+                            <span class="text-sm font-bold text-gray-900 dark:text-white">Bus #04 Arriving</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-brandOrange w-3/4 h-full rounded-full"></div>
+                        </div>
+                        <p class="text-[10px] text-right mt-1 text-gray-500">2 mins away</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white dark:bg-bgCard border-y border-gray-100 dark:border-gray-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-brandOrange font-bold tracking-wide uppercase text-sm mb-3">Why Choose SmartBus?</h2>
+                <h3 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-4">Everything you need for a stress-free commute</h3>
+                <p class="text-gray-600 dark:text-gray-400">We've built a comprehensive ecosystem to connect students with their daily transportation seamlessly.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-gray-50 dark:bg-[#111318] p-8 rounded-3xl border border-gray-100 dark:border-gray-800 hover:-translate-y-2 hover:shadow-xl hover:border-brandOrange/30 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-orange-100 dark:bg-brandOrange/10 text-brandOrange flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-location-crosshairs"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Live Tracking</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">Watch your bus move on the map in real-time. No more guessing when it will arrive at your stop.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-gray-50 dark:bg-[#111318] p-8 rounded-3xl border border-gray-100 dark:border-gray-800 hover:-translate-y-2 hover:shadow-xl hover:border-brandOrange/30 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-orange-100 dark:bg-brandOrange/10 text-brandOrange flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-regular fa-calendar-check"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Easy Booking</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">Reserve your seat for morning and return trips with just a few clicks. Guaranteed spot every time.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-gray-50 dark:bg-[#111318] p-8 rounded-3xl border border-gray-100 dark:border-gray-800 hover:-translate-y-2 hover:shadow-xl hover:border-brandOrange/30 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-orange-100 dark:bg-brandOrange/10 text-brandOrange flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-bell"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Instant Alerts</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">Receive push notifications for delays, route changes, or when the registration window is closing.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="bg-gray-50 dark:bg-[#111318] p-8 rounded-3xl border border-gray-100 dark:border-gray-800 hover:-translate-y-2 hover:shadow-xl hover:border-brandOrange/30 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-orange-100 dark:bg-brandOrange/10 text-brandOrange flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Admin Dashboard</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">Powerful tools for university admins to monitor occupancy, manage drivers, and optimize routes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Banner -->
+    <section class="py-24 relative overflow-hidden">
+        <!-- Orange Glow Background -->
+        <div class="absolute inset-0 bg-brandOrange/5 dark:bg-brandOrange/10 z-0"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-64 bg-brandOrange/20 blur-[100px] z-0 rounded-full"></div>
+
+        <div class="max-w-4xl mx-auto px-6 relative z-10 text-center">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6">Ready to upgrade your campus journey?</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto">Join thousands of students who have already switched to a smarter, stress-free way of getting to the university.</p>
+            
+            <!-- هذا الزر هو الذي سينقلك لصفحة اختيار الدور -->
+            <a href="landing.html" class="inline-flex items-center justify-center gap-3 px-10 py-4 rounded-full bg-brandOrange hover:bg-orange-600 text-white font-bold text-lg transition-transform hover:scale-105 shadow-xl shadow-brandOrange/30">
+                Get Started Now <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-bgCard border-t border-gray-200 dark:border-gray-800 py-10 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-bus text-brandOrange text-xl"></i>
+                <span class="text-lg font-bold text-gray-900 dark:text-white">SmartBus</span>
+            </div>
+            <p class="text-sm text-gray-500 dark:text-gray-400">© 2026 SmartBus System. All rights reserved.</p>
+            <div class="flex gap-4 text-gray-400 hover:text-brandOrange transition-colors">
+                <a href="#"><i class="fa-brands fa-twitter text-xl"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin text-xl"></i></a>
+                <a href="#"><i class="fa-brands fa-github text-xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Dark/Light Mode Script -->
+    <script>
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        themeToggleBtn.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+        });
+    </script>
+</body>
+</html>

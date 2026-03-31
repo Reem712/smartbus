@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartBus Student - My Profile</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans:['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brandOrange: '#d97706',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* CSS Variables for Light/Dark Mode Scrollbar */
+        :root {
+            --scroll-track: #f1f5f9;
+            --scroll-thumb: #cbd5e1;
+        }
+        .dark {
+            --scroll-track: #0f1115;
+            --scroll-thumb: #262b33;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--scroll-track); }
+        ::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .dark ::-webkit-scrollbar-thumb:hover { background: #3d4450; }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-[#0f1115] text-gray-800 dark:text-gray-200 font-sans h-screen flex overflow-hidden transition-colors duration-300 relative">
+
+    <!-- Hidden Checkbox for Mobile Menu Toggle (CSS Only trick) -->
+    <input type="checkbox" id="mobile-menu" class="hidden peer" />
+
+    <!-- Mobile Sidebar Overlay -->
+    <label for="mobile-menu" class="fixed inset-0 bg-black/60 z-40 hidden peer-checked:block md:!hidden backdrop-blur-sm cursor-pointer"></label>
+
+    <!-- Sidebar -->
+    <aside class="w-64 fixed md:relative inset-y-0 left-0 transform -translate-x-full peer-checked:translate-x-0 md:translate-x-0 border-r border-gray-200 dark:border-[#262b33] flex flex-col justify-between bg-white dark:bg-[#111318] z-50 transition-transform duration-300 ease-in-out">
+        
+        <!-- Mobile Close Sidebar Button -->
+        <label for="mobile-menu" class="md:hidden absolute top-6 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 dark:bg-[#1f232b] text-gray-500 hover:text-red-500 transition-colors cursor-pointer">
+            <i class="fa-solid fa-xmark"></i>
+        </label>
+
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Logo -->
+            <div class="h-20 flex items-center px-6 gap-3 border-b border-gray-200 dark:border-[#262b33] shrink-0">
+                <div class="w-8 h-8 rounded bg-brandOrange flex items-center justify-center text-white font-bold shrink-0">
+                    <i class="fa-solid fa-bus text-sm"></i>
+                </div>
+                <div>
+                    <h1 class="text-gray-900 dark:text-white font-bold text-lg leading-tight">SmartBus</h1>
+                    <p class="text-[11px] text-gray-500 dark:text-[#8b949e]">Student Portal</p>
+                </div>
+            </div>
+
+            <!-- Main Menu -->
+            <div class="px-4 py-6 overflow-y-auto flex-1 custom-scrollbar">
+                <p class="text-[10px] font-bold text-gray-400 dark:text-[#8b949e] uppercase tracking-wider mb-4 px-2">Main</p>
+                <nav class="space-y-1">
+                    <a href="userdashboard.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#15181e] transition-colors border-l-2 border-transparent">
+                        <i class="fa-solid fa-border-all w-5 text-center shrink-0"></i>
+                        <span class="text-sm">Dashboard</span>
+                    </a>
+                    <a href="BookTrips.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#15181e] transition-colors border-l-2 border-transparent">
+                        <i class="fa-regular fa-calendar-check w-5 text-center shrink-0"></i>
+                        <span class="text-sm">Book Trip</span>
+                    </a>
+                    <a href="myTrips.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#15181e] transition-colors border-l-2 border-transparent">
+                        <i class="fa-solid fa-bus-simple w-5 text-center shrink-0"></i>
+                        <span class="text-sm">My Trips</span>
+                    </a>
+                    <a href="Route_Details.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#15181e] transition-colors border-l-2 border-transparent">
+                        <i class="fa-solid fa-location-dot w-5 text-center shrink-0"></i>
+                        <span class="text-sm">Route Details</span>
+                    </a>
+                    <a href="trackbus.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#15181e] transition-colors border-l-2 border-transparent">
+                        <i class="fa-solid fa-location-arrow w-5 text-center shrink-0"></i>
+                        <span class="text-sm">Track Bus</span>
+                    </a>
+                    <a href="Attendance.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#15181e] transition-colors border-l-2 border-transparent">
+                        <i class="fa-solid fa-chart-simple w-5 text-center shrink-0"></i>
+                        <span class="text-sm">Attendance</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#15181e] transition-colors border-l-2 border-transparent">
+                        <i class="fa-regular fa-bell w-5 text-center shrink-0"></i>
+                        <span class="text-sm">Notifications</span>
+                    </a>
+                    <a href="chat.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#15181e] transition-colors border-l-2 border-transparent">
+                        <i class="fa-regular fa-message w-5 text-center shrink-0"></i>
+                        <span class="text-sm">Route Chat</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Bottom Menu -->
+        <div class="px-4 py-6 border-t border-gray-200 dark:border-[#262b33] shrink-0">
+            <nav class="space-y-1">
+                <a href="Support.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#15181e] transition-colors border-l-2 border-transparent">
+                    <i class="fa-regular fa-circle-question w-5 text-center shrink-0"></i>
+                    <span class="text-sm">Support</span>
+                </a>
+                <!-- Active Menu Item -->
+               <a href="Settings.html" class="flex items-center gap-3 px-3 py-2.5  font-medium  ">
+                    <i class="fa-solid fa-user w-5 text-center shrink-0"></i>
+                    <span class="text-sm">Settings</span>
+                </a>
+                <a href="sign-in.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors mt-2 border-l-2 border-transparent">
+                    <i class="fa-solid fa-arrow-right-from-bracket w-5 text-center shrink-0"></i>
+                    <span class="text-sm">Logout</span>
+                </a>
+            </nav>
+        </div>
+        
+        <!-- Desktop Collapse Button -->
+        <button class="hidden md:flex absolute top-6 -right-3 w-6 h-6 bg-white dark:bg-[#15181e] border border-gray-200 dark:border-[#262b33] rounded-full items-center justify-center text-gray-400 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white shadow-sm transition-colors duration-300">
+            <i class="fa-solid fa-chevron-left text-[10px]"></i>
+        </button>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col overflow-y-auto relative z-10 w-full">
+        
+        <!-- Header -->
+        <header class="h-20 flex items-center justify-between px-4 sm:px-8 sticky top-0 bg-white/90 dark:bg-[#0f1115]/90 backdrop-blur z-30 border-b border-gray-200 dark:border-[#262b33] transition-colors duration-300 shrink-0">
+            <div class="flex items-center gap-4">
+                <!-- Mobile Menu Button -->
+                <label for="mobile-menu" class="md:hidden text-gray-500 dark:text-[#8b949e] hover:text-brandOrange text-xl cursor-pointer">
+                    <i class="fa-solid fa-bars"></i>
+                </label>
+                <div>
+                    <h2 class="text-gray-900 dark:text-white font-bold text-lg sm:text-xl">My Profile</h2>
+                    <p class="hidden sm:block text-sm text-gray-500 dark:text-[#8b949e]">Manage your personal information and preferences</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-4 sm:gap-6">
+                <!-- Theme Toggle Button -->
+                <button id="themeToggle" class="text-gray-500 dark:text-[#8b949e] hover:text-brandOrange transition-colors" title="Toggle Light/Dark Mode">
+                    <i class="fa-regular fa-sun hidden dark:block text-lg"></i>
+                    <i class="fa-regular fa-moon block dark:hidden text-lg"></i>
+                </button>
+
+                <!-- Notification -->
+                <button class="relative text-gray-500 dark:text-[#8b949e] hover:text-gray-900 dark:hover:text-white transition-colors">
+                    <i class="fa-regular fa-bell text-lg"></i>
+                    <span class="absolute -top-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-red-500 text-[8px] font-bold text-white border-2 border-white dark:border-[#0f1115]">2</span>
+                </button>
+                
+                <!-- Profile Student -->
+                <div class="flex items-center gap-3 pl-2 sm:pl-4 border-l border-gray-200 dark:border-[#262b33] cursor-pointer">
+                    <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gray-200 dark:bg-[#262b33] text-brandOrange flex items-center justify-center font-bold text-sm shadow-sm shrink-0">S</div>
+                    <div class="hidden md:block">
+                        <p class="text-sm font-medium text-gray-900 dark:text-white leading-tight">Sara Ahmed</p>
+                        <p class="text-xs text-gray-500 dark:text-[#8b949e]">STU-001</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <div class="p-4 sm:p-6 lg:p-8 space-y-6 max-w-5xl mx-auto w-full">
+            
+            <!-- Top Card: Avatar & Quick Info -->
+            <div class="bg-white dark:bg-[#15181e] border border-gray-200 dark:border-[#262b33] rounded-xl p-6 sm:p-8 shadow-sm dark:shadow-none transition-colors duration-300">
+                <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+                    
+                    <!-- Avatar with Upload Overlay -->
+                    <div class="relative group cursor-pointer shrink-0">
+                        <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-orange-50 dark:bg-[rgba(217,119,6,0.1)] text-brandOrange border-4 border-white dark:border-[#15181e] shadow-md flex flex-col items-center justify-center transition-colors">
+                            <span class="text-3xl font-bold">S</span>
+                        </div>
+                        <!-- Hover Overlay -->
+                        <div class="absolute inset-0 bg-black/50 rounded-full flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm border-4 border-transparent">
+                            <i class="fa-solid fa-camera text-white text-xl mb-1"></i>
+                            <span class="text-[10px] text-white font-medium">Change</span>
+                        </div>
+                        <!-- Simulated input file -->
+                        <input type="file" class="hidden">
+                    </div>
+
+                    <!-- User Info Text -->
+                    <div class="text-center sm:text-left flex-1 pt-2">
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-1">Sara Ahmed</h2>
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm text-gray-500 dark:text-[#8b949e]">
+                            <span><i class="fa-regular fa-id-card mr-1.5"></i> STU-001</span>
+                            <span class="hidden sm:inline-block w-1 h-1 rounded-full bg-gray-300 dark:bg-[#3d4450]"></span>
+                          <span><i class="fa-solid fa-graduation-cap mr-1.5"></i>Frontend And CrossPlatform</span>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-green-50 dark:bg-[#11231b] text-green-700 dark:text-green-400 border border-green-200 dark:border-green-500/20">
+                                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Active Account
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Form Card: Personal Details & Settings -->
+            <div class="bg-white dark:bg-[#15181e] border border-gray-200 dark:border-[#262b33] rounded-xl p-6 sm:p-8 shadow-sm dark:shadow-none transition-colors duration-300">
+                <form action="#" method="POST">
+                    
+                    <!-- Section 1: Personal Information -->
+                    <div class="mb-8">
+                        <h3 class="text-base font-semibold text-gray-900 dark:text-white mb-5 border-b border-gray-100 dark:border-[#262b33]/50 pb-3 flex items-center gap-2">
+                            <i class="fa-regular fa-user text-brandOrange"></i> Personal Information
+                        </h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
+                            <!-- First Name -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">First Name</label>
+                                <input type="text" value="Sara" class="w-full bg-gray-50 dark:bg-[#1f232b] text-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-[#6b7280] rounded-lg px-4 py-2.5 outline-none focus:ring-1 focus:ring-brandOrange border border-gray-200 dark:border-[#262b33] transition-all">
+                            </div>
+
+                            <!-- Last Name -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Last Name</label>
+                                <input type="text" value="Ahmed" class="w-full bg-gray-50 dark:bg-[#1f232b] text-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-[#6b7280] rounded-lg px-4 py-2.5 outline-none focus:ring-1 focus:ring-brandOrange border border-gray-200 dark:border-[#262b33] transition-all">
+                            </div>
+
+                            <!-- Email -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Email Address</label>
+                                <div class="relative">
+                                    <i class="fa-regular fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-[#8b949e]"></i>
+                                    <input type="email" value="sara@uni.edu" class="w-full bg-gray-50 dark:bg-[#1f232b] text-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-[#6b7280] rounded-lg pl-11 pr-4 py-2.5 outline-none focus:ring-1 focus:ring-brandOrange border border-gray-200 dark:border-[#262b33] transition-all">
+                                </div>
+                            </div>
+
+                            <!-- Phone Number -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Phone Number</label>
+                                <div class="relative">
+                                    <!-- Country Code -->
+                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 border-r border-gray-200 dark:border-[#262b33] pr-3 bg-gray-100 dark:bg-[#15181e] rounded-l-lg border-y">
+                                        <span class="text-sm text-gray-600 dark:text-[#8b949e] font-medium">+962</span>
+                                    </div>
+                                    <input type="tel" value="79 123 4567" class="w-full bg-gray-50 dark:bg-[#1f232b] text-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-[#6b7280] rounded-r-lg rounded-l-none pl-[4.5rem] pr-4 py-2.5 outline-none focus:ring-1 focus:ring-brandOrange border border-gray-200 dark:border-[#262b33] border-l-0 transition-all">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 2: Default Route Preferences -->
+                    <div class="mb-8">
+                        <h3 class="text-base font-semibold text-gray-900 dark:text-white mb-5 border-b border-gray-100 dark:border-[#262b33]/50 pb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-location-dot text-brandOrange"></i> Default Route Preferences
+                        </h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
+                            <!-- Default Route -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Primary Route</label>
+                                <div class="relative text-gray-900 dark:text-white">
+                                    <select class="w-full bg-gray-50 dark:bg-[#1f232b] text-sm appearance-none rounded-lg px-4 py-2.5 outline-none focus:ring-1 focus:ring-brandOrange border border-gray-200 dark:border-[#262b33] transition-all cursor-pointer">
+                                        <option value="r1" selected>Aqaleem → Stadium</option>
+                                        <option value="r2">Seil → Stadium</option>
+                                        <option value="r3">City Center → Stadium</option>
+                                    </select>
+                                    <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-xs text-gray-400 dark:text-[#8b949e] pointer-events-none"></i>
+                                </div>
+                            </div>
+
+                            <!-- Default Pickup Point -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Default Pickup Point</label>
+                                <div class="relative text-gray-900 dark:text-white">
+                                    <select class="w-full bg-gray-50 dark:bg-[#1f232b] text-sm appearance-none rounded-lg px-4 py-2.5 outline-none focus:ring-1 focus:ring-brandOrange border border-gray-200 dark:border-[#262b33] transition-all cursor-pointer">
+                                        <option value="p1">Aqaleem Gate</option>
+                                        <option value="p2" selected>Al-Rawda Square</option>
+                                        <option value="p3">Seil Junction</option>
+                                    </select>
+                                    <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-xs text-gray-400 dark:text-[#8b949e] pointer-events-none"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 3: Security -->
+                    <div>
+                        <h3 class="text-base font-semibold text-gray-900 dark:text-white mb-5 border-b border-gray-100 dark:border-[#262b33]/50 pb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-shield-halved text-brandOrange"></i> Security & Password
+                        </h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
+                            <!-- Current Password -->
+                            <div class="md:col-span-2 max-w-md">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Current Password</label>
+                                <input type="password" placeholder="••••••••" class="w-full bg-gray-50 dark:bg-[#1f232b] text-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-[#6b7280] rounded-lg px-4 py-2.5 outline-none focus:ring-1 focus:ring-brandOrange border border-gray-200 dark:border-[#262b33] transition-all">
+                            </div>
+
+                            <!-- New Password -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">New Password</label>
+                                <input type="password" placeholder="Leave blank to keep current" class="w-full bg-gray-50 dark:bg-[#1f232b] text-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-[#6b7280] rounded-lg px-4 py-2.5 outline-none focus:ring-1 focus:ring-brandOrange border border-gray-200 dark:border-[#262b33] transition-all">
+                            </div>
+
+                            <!-- Confirm New Password -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Confirm New Password</label>
+                                <input type="password" placeholder="Confirm your new password" class="w-full bg-gray-50 dark:bg-[#1f232b] text-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-[#6b7280] rounded-lg px-4 py-2.5 outline-none focus:ring-1 focus:ring-brandOrange border border-gray-200 dark:border-[#262b33] transition-all">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="mt-10 pt-6 border-t border-gray-100 dark:border-[#262b33]/50 flex flex-col-reverse sm:flex-row items-center justify-end gap-3 sm:gap-4">
+                        <button type="button" class="w-full sm:w-auto px-6 py-2.5 rounded-lg border border-gray-200 dark:border-[#262b33] text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-transparent hover:bg-gray-50 dark:hover:bg-[#1f232b] transition-colors shadow-sm dark:shadow-none text-center">
+                            Discard Changes
+                        </button>
+                        <button type="button" class="w-full sm:w-auto px-6 py-2.5 rounded-lg bg-brandOrange hover:bg-orange-600 text-sm font-medium text-white transition-colors shadow-sm flex items-center justify-center">
+                            <i class="fa-solid fa-check mr-2"></i> Save Profile
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Script  for Dark/Light mode toggle -->
+    <script>
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        themeToggleBtn.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+        });
+    </script>
+</body>
+</html>
